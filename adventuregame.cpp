@@ -3,12 +3,30 @@
 #include <string>
 #include <boost/algorithm/string.hpp>  
 
+///////////
+///Player
+///////////
+
+void Player::go(int x) {
+	location = location->adjacent[x];
+	switch (x) {
+		case 0: std::cout << "You have moved north.\n"; return;
+		case 1: std::cout << "You have moved south.\n"; return;
+		case 2: std::cout << "You have moved east.\n"; return;
+		case 3: std::cout << "You have moved west.\n"; return;
+		default: return;
+	}
+}
+
 void Player::showHealth() const {
 	std::cout << "Your current health is " << player.hp << ".\n";
 }
 
 void Player::modifyHealth(int x) {
 	player.hp += x;
+	std::cout << "You have ";
+	if (x > 0) ? std::cout << "gained ": std::cout << "lost ";
+	std::cout << x << " health.\n";
 }
 
 bool Player::isAlive() const {
@@ -71,3 +89,23 @@ help:
 	std::cout << "Valid commands are 'eat', 'get', 'drop', 'go', 'attack', 'search', 'inventory', 'health', and 'help'.\n";
 	return;
 }
+
+///////////
+///Room
+///////////
+
+///////////
+///Item
+///////////
+
+///////////
+///Monster
+///////////
+
+///////////
+///Food
+///////////
+
+///////////
+///Weapon
+///////////

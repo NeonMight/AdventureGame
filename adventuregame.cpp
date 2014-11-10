@@ -18,8 +18,18 @@ void Player::go(int x) {
 	}
 }
 
-void Player::showHealth() const {
-	std::cout << "Your current health is " << player.hp << ".\n";
+void Player::get(int x) {
+	int i = nextOpen(); // Get next open spot
+	if ( i == -1 ) { std::cout << "There is no space in your inventory.\n"; return; } // If no spot available, return
+	inventory[i] = location->atIndex(x); // Give the item to the inventory
+	location->give(x); // Take from room's inventory
+}
+
+int Player::nextOpen() const {
+	for (int i = 0; i < 10; i++) {
+		if ( inventory[i] == NULL ) return i;
+	}
+	return -1; // No space available
 }
 
 void Player::modifyHealth(int x) {
@@ -27,6 +37,10 @@ void Player::modifyHealth(int x) {
 	std::cout << "You have ";
 	if (x > 0) ? std::cout << "gained ": std::cout << "lost ";
 	std::cout << x << " health.\n";
+}
+
+void Player::showHealth() const {
+	std::cout << "Your current health is " << player.hp << ".\n";
 }
 
 bool Player::isAlive() const {
@@ -58,17 +72,47 @@ void Player::doInput(string s) {
 	
 eat:
 	switch (args[1]) {
-		default: std::cout << "Invalid argument for 'eat'.\n"; return;
+		case "0": eat(0); return;
+		case "1": eat(1); return;
+		case "2": eat(2); return;
+		case "3": eat(3); return;
+		case "4": eat(4); return;
+		case "5": eat(5); return;
+		case "6": eat(6); return;
+		case "7": eat(7); return;
+		case "8": eat(8); return;
+		case "9": eat(9); return;
+		default: std::cout << "Invalid argument for 'eat'.\nValid arguments for 'eat' are numbers 0-9.\n"; return;
 	}
 	
 get:
 	switch (args[1]) {
-		default: std::cout << "Invalid argument for 'get'.\n"; return;
+		case "0": get(0); return;
+		case "1": get(1); return;
+		case "2": get(2); return;
+		case "3": get(3); return;
+		case "4": get(4); return;
+		case "5": get(5); return;
+		case "6": get(6); return;
+		case "7": get(7); return;
+		case "8": get(8); return;
+		case "9": get(9); return;
+		default: std::cout << "Invalid argument for 'get'.\nValid arguments for 'get' are numbers 0-9.\n"; return;
 	}
 	
 drop:
 	switch (args[1]) {
-		default: std::cout << "Invalid argument for 'drop'.\n"; return;
+		case "0": drop(0); return;
+		case "1": drop(1); return;
+		case "2": drop(2); return;
+		case "3": drop(3); return;
+		case "4": drop(4); return;
+		case "5": drop(5); return;
+		case "6": drop(6); return;
+		case "7": drop(7); return;
+		case "8": drop(8); return;
+		case "9": drop(9); return;
+		default: std::cout << "Invalid argument for 'drop'.\nValid arguments for 'drop' are numbers 0-9.\n"; return;
 	}
 	
 go:
@@ -82,7 +126,12 @@ go:
 	
 attack:
 	switch (args[1]) {
-		default: std::cout << "Invalid argument for 'attack'.\n"; return;
+		case "0": attack(0); return;
+		case "1": attack(1); return;
+		case "2": attack(2); return;
+		case "3": attack(3); return;
+		case "4": attack(4); return;
+		default: std::cout << "Invalid argument for 'attack'.\nValid arguments for 'attack' are numbers 0-4.\n"; return;
 	}
 	
 help:
@@ -93,6 +142,13 @@ help:
 ///////////
 ///Room
 ///////////
+
+int Room::nextOpen() const {
+	for (int i = 0; i < 10; i++) {
+		if ( inventory[i] == NULL ) return i;
+	}
+	return -1; // No space available
+}
 
 ///////////
 ///Item

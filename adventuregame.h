@@ -20,7 +20,7 @@ class Player //denotes the player character
 		void attack(Monster m); //does damage equal to player attack + currentwep. if null, + 0 */
 		int nextOpen() const; // Gives reference to next open space in inventory
 		Item* atIndex(int) const; // Gives reference to the item at an index in the inventory
-		void checkInventory(); //outputs all things in player inventory
+		void checkInventory() const; //outputs all things in player inventory
 		//void takeDamage(int d); //function to access player hp when monster attacks
 		void modifyHealth(int); // Takes an int value and alters player's health by that value
 		void showHealth() const; // Prints out player's health

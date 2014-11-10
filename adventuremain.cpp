@@ -5,10 +5,10 @@
 using namespace std;
 
 int main() {
+	string input;
 startgame: // startgame label. When restarting a game, it will jump back to here.
 	//Initializations
-	Player p(); // This is placeholder code.
-	string input;
+	Player p(100,10,input,/*Room*/,/*Item array*/,NULL); // This is placeholder code.
 
 	// Game loop
 	while (p.isAlive()) { // Continue looping while the player is alive

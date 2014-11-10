@@ -8,6 +8,7 @@ int main() {
 startgame: // startgame label. When restarting a game, it will jump back to here.
 	//Initializations
 	Player p(); // This is placeholder code.
+	string input;
 
 	// Game loop
 	while (p.isAlive()) { // Continue looping while the player is alive

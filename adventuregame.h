@@ -46,6 +46,8 @@ class Room //each separate space. Player can travel between adjacent spaces with
 		void take(int); // Take an item from the player.
 		int nextOpen() const; // Gives index to next open space in inventory. -1 for no space available.
 		Item* atIndex(int) const; // Gives reference to the item at an index in the inventory
+		string getName() const; // Returns name of room
+		Room* getAdjacent(int) const; // Return pointer to adjacent room
 	private:
 		string name;	//basic name
 		Item** inventory; //items that room contains (Array)
@@ -65,7 +67,8 @@ class Item //items are things that the player can add to inventory. Some points 
 
 class Monster : public Player //monsters will attack player if player is in same room. Player cannot use go if monsters are present.
 {
-		
+	public:
+		string getName() const;
 };
 
 //derived classes

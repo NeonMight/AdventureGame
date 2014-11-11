@@ -22,7 +22,8 @@ Player::~Player()
 }
 
 void Player::go(int x) {
-	location = location->adjacent[x];
+	if (location->getAdjacent(x) == NULL) { std::cout << "No passage in this direction.\n"; return; }
+	location = location->getAdjacent(x);
 	switch (x) {
 		case 0: std::cout << "You have moved north.\n"; return;
 		case 1: std::cout << "You have moved south.\n"; return;
@@ -55,9 +56,10 @@ int Player::nextOpen() const {
 }
 
 void Player::checkInventory() const {
+	std::cout << "Inventory:\n";
 	for (int i = 0; i < 10; i++) {
 		std::cout << i < ": ";
-		if (inventory[i] != NULL) ? std::cout << inventory[x]->getName() << "\n" : std::cout << "Empty\n";
+		if (inventory[i] != NULL) ? std::cout << inventory[i]->getName() << "\n" : std::cout << "Empty\n";
 	}
 }
 
@@ -203,11 +205,43 @@ Room::~Room()
 	delete [] enemies;
 }
 
+void Room::searchRoom() const {
+	std::cout << "Items:\n";
+	for (int i = 0; i < 10; i++) {
+		std::cout << i < ": ";
+		if (inventory[i] != NULL) ? std::cout << inventory[i]->getName() << "\n" : std::cout << "Empty\n";
+	}
+	
+	std::cout << "Monsters:\n";
+	for (int i = 0; i < 5; i++) {
+		std::cout << i < ": ";
+		if (enemies[i] != NULL) ? std::cout << enemies[i]->getName() << "\n" : std::cout << "No Enemy\n";
+	}
+	
+	std::cout << "Connected Rooms:\n";
+	std::cout << "North: ";
+	if (adjacent[0] != NULL) ? std::cout << adjacent[0]->getName() << "\n" : std::cout << "No Passage\n";
+	std::cout << "South: ";
+	if (adjacent[1] != NULL) ? std::cout << adjacent[1]->getName() << "\n" : std::cout << "No Passage\n";
+	std::cout << "East: ";
+	if (adjacent[2] != NULL) ? std::cout << adjacent[2]->getName() << "\n" : std::cout << "No Passage\n";
+	std::cout << "West: ";
+	if (adjacent[3] != NULL) ? std::cout << adjacent[3]->getName() << "\n" : std::cout << "No Passage\n";
+}
+
 int Room::nextOpen() const {
 	for (int i = 0; i < 10; i++) {
 		if ( inventory[i] == NULL ) return i;
 	}
 	return -1; // No space available
+}
+
+string Room::getName() const {
+	return name;
+}
+
+Room* Room::getAdjacent(int x) const {
+	return adjacent[x];
 }
 
 ///////////
@@ -221,6 +255,10 @@ string Item::getName() const {
 ///////////
 ///Monster
 ///////////
+
+string Monster::getName() const {
+	return name;
+}
 
 ///////////
 ///Food

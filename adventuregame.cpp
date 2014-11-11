@@ -54,6 +54,13 @@ int Player::nextOpen() const {
 	return -1; // No space available
 }
 
+void Player::checkInventory() const {
+	for (int i = 0; i < 10; i++) {
+		std::cout << i < ": ";
+		if (inventory[i] != NULL) ? std::cout << inventory[x]->getName() << "\n" : std::cout << "Empty\n";
+	}
+}
+
 void Player::modifyHealth(int x) {
 	player.hp += x;
 	std::cout << "You have ";
@@ -206,6 +213,10 @@ int Room::nextOpen() const {
 ///////////
 ///Item
 ///////////
+
+string Item::getName() const {
+	return name;
+}
 
 ///////////
 ///Monster

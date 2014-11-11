@@ -39,6 +39,14 @@ void Player::get(int x) {
 	location->give(x); // Take from room's inventory
 }
 
+void Player::eat(int x) {
+	/*Code to determine if item is food will go here*/
+	int v = inventory[x]->getValue(); // Get healing value
+	modifyHealth(v); // Add to health
+	/*Need to deconstruct food?*/
+	inventory[x] = NULL; // Open space in inventory
+}
+
 int Player::nextOpen() const {
 	for (int i = 0; i < 10; i++) {
 		if ( inventory[i] == NULL ) return i;
@@ -207,6 +215,14 @@ int Room::nextOpen() const {
 ///Food
 ///////////
 
+int Food::getValue() const {
+	return val;
+}
+
 ///////////
 ///Weapon
 ///////////
+
+int Weapon::getValue() const {
+	return val;
+}

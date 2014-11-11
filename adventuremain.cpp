@@ -1,4 +1,4 @@
-#include "adventure.h"
+#include "adventuregame.h"
 #include <iostream>
 #include <string>
 #include <boost/algorithm/string.hpp>  

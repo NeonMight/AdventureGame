@@ -56,9 +56,9 @@ class Room //each separate space. Player can travel between adjacent spaces with
 class Item //items are things that the player can add to inventory. Some points in game may check inventory to see if player has that item.
 {
 	public:
-		//item cannot do things
 		Item();
 		~Item();
+		string getName() const;
 	private:
 		string name;
 };

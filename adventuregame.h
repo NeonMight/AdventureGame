@@ -6,7 +6,7 @@
 class Player //denotes the player character
 {
 	public:
-		Player(int health, int atk, string n, Room* l, Item** i, Weapon* currentwep);
+		Player(int health, int a, string n, Room* l, Weapon* currentwep); //no inventory because always starts as null
 		~Player();
 		void go(int); // Goes in a direction, 0-4, corresponding with n,s,e, and w
 		void get(int); //Takes int value to correspond with item index in room. When player gets a weapon, modify currentwep. Item is removed from room and added to inventory.
@@ -38,7 +38,7 @@ class Player //denotes the player character
 class Room //each separate space. Player can travel between adjacent spaces with go command
 {
 	public:
-		Room(int i, string n, Room** a, Item** t, Monster** m);
+		Room(string n, Room** a, Item** t, Monster** m);
 		~Room();
 		//void viewAdjacent() const; //prints out all possible directions to go from room
 		void searchRoom() const; // prints out all the items, monsters, and adjacent rooms
@@ -47,12 +47,10 @@ class Room //each separate space. Player can travel between adjacent spaces with
 		int nextOpen() const; // Gives reference to next open space in inventory
 		Item* atIndex(int) const; // Gives reference to the item at an index in the inventory
 	private:
-		int id;	//unique identifier
 		string name;	//basic name
 		Item** inventory; //items that room contains (Array)
 		Monster** enemies; //Monsters that the room contains (Array)
 		Room** adjacent;	//room pointer list denoting different directions; north=0, east=1, south=2, west=3
-		
 };
 
 class Item //items are things that the player can add to inventory. Some points in game may check inventory to see if player has that item.

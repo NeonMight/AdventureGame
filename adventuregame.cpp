@@ -247,6 +247,15 @@ Room* Room::getAdjacent(int x) const {
 ///////////
 ///Item
 ///////////
+Item::Item(string n)
+{
+	name = n;
+}
+
+Item::~Item()
+{
+	name = NULL;
+}
 
 string Item::getName() const {
 	return name;
@@ -263,7 +272,15 @@ string Monster::getName() const {
 ///////////
 ///Food
 ///////////
+Food::Food(string n, int v) : Item(n) //call item constructor
+{
+	val = v;
+}
 
+Food::~Food()
+{
+	val = NULL;
+}
 int Food::getValue() const {
 	return val;
 }
@@ -272,6 +289,15 @@ int Food::getValue() const {
 ///Weapon
 ///////////
 
+Weapon::Weapon(string n, int v) : Item(n)
+{
+	val = v;
+}
+
+Weapon::~Weapon()
+{
+	val = NULL;
+}
 int Weapon::getValue() const {
 	return val;
 }

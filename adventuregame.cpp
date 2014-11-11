@@ -1,4 +1,4 @@
-#include "adventure.h"
+#include "adventurev1.h"
 #include <iostream>
 #include <string>
 #include <boost/algorithm/string.hpp>  
@@ -6,6 +6,20 @@
 ///////////
 ///Player
 ///////////
+
+Player::Player(int health, int a, string n, Room* l, Weapon* currentwep)
+{
+	hp = health;
+	atk = a;
+	name = n;
+	location = l;
+	inventory = new item*[10];
+}
+
+Player::~Player()
+{
+	delete [] inventory;
+}
 
 void Player::go(int x) {
 	location = location->adjacent[x];
@@ -142,6 +156,37 @@ help:
 ///////////
 ///Room
 ///////////
+
+Room::Room(string n, Room** a, Item** t, Monster** m)
+{
+	name = n;
+	adjacent = new Room*[4]; no more than 4 adjacent rooms
+	inventory = new Item*[10];	//no more than 10 items per room
+	enemies = new Monster*[5];	//no more than 5 enemies per room
+	//if there is an overflow, for loop will handle it
+	//construct adjacent rooms
+	for( int i = 0; i < 4; i++)
+	{
+		adjacent[i] = a[i];
+	}
+	//construct inventory
+	for( int j = 0; j < 10; j++)
+	{
+		inventory[j] = i[j];
+	}
+	//construct enemies
+	for( int k = 0; k < 5; k++)
+	{
+		enemies[k] = m[k];
+	}
+}
+
+Room::~Room()
+{
+	delete [] adjacent;
+	delete [] inventory;
+	delete [] enemies;
+}
 
 int Room::nextOpen() const {
 	for (int i = 0; i < 10; i++) {

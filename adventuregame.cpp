@@ -7,13 +7,13 @@
 ///Player
 ///////////
 
-Player::Player(int health, int a, string n, Room* l, Weapon* currentwep)
+Player::Player(int health, int a, Room* l, Weapon* c)
 {
 	hp = health;
 	atk = a;
-	name = n;
 	location = l;
 	inventory = new item*[10];
+	currentwep = c;
 }
 
 Player::~Player()
@@ -284,6 +284,11 @@ string Item::getName() const {
 ///////////
 ///Monster
 ///////////
+
+Monster::Monster(int health, int a, string n, Room* l, Weapon* c) : Player(int health, int a, Room* l, Weapon* c)
+{
+	name = n;
+}
 
 string Monster::getName() const {
 	return name;

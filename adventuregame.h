@@ -57,11 +57,12 @@ class Room //each separate space. Player can travel between adjacent spaces with
 class Item //items are things that the player can add to inventory. Some points in game may check inventory to see if player has that item.
 {
 	public:
-		Item(string n);
+		Item(string n, int iid);
 		~Item();
 		string getName() const;
 	private:
 		string name;
+		int id;
 };
 
 class Monster : public Player //monsters will attack player if player is in same room. Player cannot use go if monsters are present.
@@ -79,7 +80,7 @@ class Monster : public Player //monsters will attack player if player is in same
 class Food : public Item //food will restore player health
 {
 	public:
-		Food(string n, int v); //calls item constructor
+		Food(string n, int iid, int v); //calls item constructor
 		~Food();
 		int getValue() const;
 	private:
@@ -89,7 +90,7 @@ class Food : public Item //food will restore player health
 class Weapon : public Item //temporarily boosts player attack. player cannot have more than one
 {
 	public:
-		Weapon(string n, int v); //calls item constructor
+		Weapon(string n, int iid, int v); //calls item constructor
 		~Weapon();
 		int getValue() const;
 	private:

@@ -52,9 +52,10 @@ void Player::eat(int x) {
 void Player::drop(int x) {
 	if (inventory[x] == NULL) {std::cout << "No item in this space.\n"; return;}
 	int i = location->nextOpen();
-	std::cout << "You dropped " << inventory[x]->getName() << ".\n";
 	if (i == -1) {std::cout << "No space in the room.\n"; return;}
+	std::cout << "You dropped " << inventory[x]->getName() << ".\n";
 	location->take(i,inventory[x]);
+	inventory[x] = NULL;
 }
 
 int Player::nextOpen() const {

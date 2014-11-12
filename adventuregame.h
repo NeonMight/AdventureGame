@@ -6,7 +6,7 @@
 class Player //denotes the player character
 {
 	public:
-		Player(int health, int a, string n, Room* l, Weapon* currentwep); //no inventory because always starts as null
+		Player(int health, int a, string n, Room* l, Weapon* c); //no inventory because always starts as null
 		~Player();
 		void go(int); // Goes in a direction, 0-4, corresponding with n,s,e, and w
 		void get(int); //Takes int value to correspond with item index in room. When player gets a weapon, modify currentwep. Item is removed from room and added to inventory.
@@ -68,6 +68,8 @@ class Item //items are things that the player can add to inventory. Some points 
 class Monster : public Player //monsters will attack player if player is in same room. Player cannot use go if monsters are present.
 {
 	public:
+		Monster(int health, int a, string n, Room* l, Weapon* c); //will call player constructor with same parameters
+		~Monster();
 		string getName() const;
 };
 
@@ -76,7 +78,7 @@ class Monster : public Player //monsters will attack player if player is in same
 class Food : public Item //food will restore player health
 {
 	public:
-		Food(string n, int v);
+		Food(string n, int v); //calls item constructor
 		~Food();
 		int getValue() const;
 	private:
@@ -86,7 +88,7 @@ class Food : public Item //food will restore player health
 class Weapon : public Item //temporarily boosts player attack. player cannot have more than one
 {
 	public:
-		Weapon(string n, int v);
+		Weapon(string n, int v); //calls item constructor
 		~Weapon();
 		int getValue() const;
 	private:

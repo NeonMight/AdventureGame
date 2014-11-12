@@ -36,6 +36,7 @@ void Player::go(int x) {
 void Player::get(int x) {
 	int i = nextOpen(); // Get next open spot
 	if ( i == -1 ) { std::cout << "There is no space in your inventory.\n"; return; } // If no spot available, return
+	std::cout << "You picked up " << location->atIndex(x)->getName() << ".\n";
 	inventory[i] = location->atIndex(x); // Give the item to the inventory
 	location->give(x); // Take from room's inventory
 }
@@ -46,6 +47,14 @@ void Player::eat(int x) {
 	modifyHealth(v); // Add to health
 	/*Need to deconstruct food?*/
 	inventory[x] = NULL; // Open space in inventory
+}
+
+void Player::drop(int x) {
+	if (inventory[x] == NULL) {std::cout << "No item in this space.\n"; return;}
+	int i = location->nextOpen();
+	std::cout << "You dropped " << inventory[x]->getName() << ".\n";
+	if (i == -1) {std::cout << "No space in the room.\n"; return;}
+	location->take(i,inventory[x]);
 }
 
 int Player::nextOpen() const {
@@ -227,6 +236,16 @@ void Room::searchRoom() const {
 	if (adjacent[2] != NULL) ? std::cout << adjacent[2]->getName() << "\n" : std::cout << "No Passage\n";
 	std::cout << "West: ";
 	if (adjacent[3] != NULL) ? std::cout << adjacent[3]->getName() << "\n" : std::cout << "No Passage\n";
+}
+
+void Room::give(int x) {
+	//This should only be called from get()
+	inventory[x] = NULL;
+}
+
+void Room::take(int x, Item* y) {
+	//This should only be called from drop()
+	inventory[x] = y;
 }
 
 int Room::nextOpen() const {

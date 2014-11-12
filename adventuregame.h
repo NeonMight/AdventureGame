@@ -43,7 +43,7 @@ class Room //each separate space. Player can travel between adjacent spaces with
 		//void viewAdjacent() const; //prints out all possible directions to go from room
 		void searchRoom() const; // prints out all the items, monsters, and adjacent rooms
 		void give(int); // Give an item to the player.
-		void take(int); // Take an item from the player.
+		void take(int,Item*); // Take an item from the player.
 		int nextOpen() const; // Gives index to next open space in inventory. -1 for no space available.
 		Item* atIndex(int) const; // Gives reference to the item at an index in the inventory
 		string getName() const; // Returns name of room

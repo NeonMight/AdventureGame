@@ -6,9 +6,9 @@ using namespace std;
 
 int main() {
 	string input;
-startgame: // startgame label. When restarting a game, it will jump back to here.
+//startgame: // startgame label. When restarting a game, it will jump back to here.
 	//Initializations
-	Player p(100,10,input,/*Room*/,/*Item array*/,NULL); // This is placeholder code.
+	Player p(100,10,/*Room*/,NULL); // This is placeholder code.
 
 	// Game loop
 	while (p.isAlive()) { // Continue looping while the player is alive
@@ -18,6 +18,7 @@ startgame: // startgame label. When restarting a game, it will jump back to here
 
 	// Check if player wants to play again
 	cout << "You died!\n";
+/*
 playagainchecker: // If input is invalid, program will jump back to here
 	cout << "Do you want to play again?\n";
 	cout << "Type 'y' or 'yes' for yes. Type 'n' or 'no' for no.\n";
@@ -36,3 +37,4 @@ restartgame: // restartgame label. Program jumps here if the player wants to pla
 	// Code will go here to deconstruct all objects constructed at the beginning of the program.
 	goto startgame;	// Program will jump to startgame label, recreating all the objects allowing the player to play again.
 }
+8?

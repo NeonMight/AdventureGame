@@ -2,7 +2,6 @@
 //Created by Stephen Hoffman, Ethan Waddle, & Justin McAlister
 #include <iostream>
 //Flow: Ask for user input, player does action, if monsters are present, they attack, repeat.
-//enum Direction {NORTH, SOUTH, EAST, WEST};
 class Player //denotes the player character
 {
 	public:
@@ -13,15 +12,9 @@ class Player //denotes the player character
 		void drop(int); //Takes int value to correspond with item index in inventory to drop. Adds to room
 		void eat(int); //Adds food value, then consumes food
 		void attack(int); //does damage equal to player attack + currentwep. if null, + 0. Takes index of monster in room
-		/* void go(); //go followed by north, south, east, or west will send player to adjacent room based on initialization list
-		void get(Item i, Room r); //when player gets a weapon, modify currentwep; adds i from current room inventory to player inventory
-		void drop(Item i, Room r); //when player drops a weapon, modify currentwep
-		void eat(Food f); //adds food value, then deletes food
-		void attack(Monster m); //does damage equal to player attack + currentwep. if null, + 0 */
 		int nextOpen() const; // Gives reference to next open space in inventory
 		Item* atIndex(int) const; // Gives reference to the item at an index in the inventory
 		void checkInventory() const; //outputs all things in player inventory
-		//void takeDamage(int d); //function to access player hp when monster attacks
 		void modifyHealth(int); // Takes an int value and alters player's health by that value
 		void showHealth() const; // Prints out player's health
 		bool isAlive() const; // Returns status of the player, alive or dead
@@ -39,7 +32,6 @@ class Room //each separate space. Player can travel between adjacent spaces with
 	public:
 		Room(string n, Room** a, Item** t, Monster** m);
 		~Room();
-		//void viewAdjacent() const; //prints out all possible directions to go from room
 		void searchRoom() const; // prints out all the items, monsters, and adjacent rooms
 		void give(int); // Give an item to the player.
 		void take(int,Item*); // Take an item from the player.

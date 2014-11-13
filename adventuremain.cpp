@@ -37,4 +37,4 @@ restartgame: // restartgame label. Program jumps here if the player wants to pla
 	// Code will go here to deconstruct all objects constructed at the beginning of the program.
 	goto startgame;	// Program will jump to startgame label, recreating all the objects allowing the player to play again.
 }
-8?
+*/

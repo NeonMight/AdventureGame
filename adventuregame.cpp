@@ -45,7 +45,7 @@ void Player::eat(int x) {
 	/*Code to determine if item is food will go here*/
 	int v = inventory[x]->getValue(); // Get healing value
 	modifyHealth(v); // Add to health
-	/*Need to deconstruct food?*/
+	~*inventory[x];
 	inventory[x] = NULL; // Open space in inventory
 }
 
@@ -101,7 +101,7 @@ void Player::doInput(string s) {
 	
 	// Put first word into first array
 	int i = 0;
-	while (i != '\0') {
+	while (i != ' ') {
 		args[0][i] = s[i];
 		i++;
 	}

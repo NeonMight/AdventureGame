@@ -57,14 +57,18 @@ class Item //items are things that the player can add to inventory. Some points 
 		int id;
 };
 
-class Monster : public Player //monsters will attack player if player is in same room. Player cannot use go if monsters are present.
+class Monster //monsters will attack player if player is in same room. Player cannot use go if monsters are present.
 {
-	private:
-		string name;
 	public:
-		Monster(int health, int a, string n, Room* l, Weapon* c); //will call player constructor with same parameters
+		//Monster(int health, int a, string n, Room* l, Weapon* c); //will call player constructor with same parameters
+		Monster(int health, int a, string n); // Monster constructor
 		~Monster();
 		string getName() const;
+		void modifyHealth();
+	private:
+		int atk; // Attack damage
+		int hp; // Hit points
+		string name;
 };
 
 //derived classes

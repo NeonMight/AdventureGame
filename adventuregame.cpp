@@ -58,6 +58,13 @@ void Player::drop(int x) {
 	inventory[x] = NULL;
 }
 
+void Player::attack(int x) {
+	Monster* m = location->enemies[x];
+	if ( m == NULL ) { std::cout << "No enemy in this position.\n"; return; }
+	m->modifyHealth(-atk);
+	std::cout << "You attacked " << m->getName() << " for " << atk << " hit points.\n";
+}
+
 int Player::nextOpen() const {
 	for (int i = 0; i < 10; i++) {
 		if ( inventory[i] == NULL ) return i;
@@ -89,13 +96,28 @@ bool Player::isAlive() const {
 }
 
 void Player::doInput(string s) {
-	// Separate string into 2 strings in arg array
+	// Create 2 new arrays, each to hold a word.
 	string args[2];
-	/*Code goes here to split string*/
+	
+	// Put first word into first array
+	int i = 0;
+	while (i != '\0') {
+		args[0][i] = s[i];
+		i++;
+	}
+	
+	// Put second word into second array
+	i++;
+	int j = 0;
+	while (i != '\0') {
+		args[1][j] = s[i];
+		i++;
+		j++;
+	}
 	
 	// Make the strings lowercase so they can be checked without being case sensitive.
-	for (int i = 0; i < 2; i++)
-		boost::algorithm::string::to_lower(args[i]); // Should convert string to lowercase. Have not tested it yet.
+	for (int k = 0; k < 2; k++)
+		boost::algorithm::string::to_lower(args[k]); // Should convert string to lowercase. Have not tested it yet.
 		
 	// Base input checker, takes the first word and uses the switch to call the needed function
 	switch (args[0]) {
@@ -286,13 +308,23 @@ string Item::getName() const {
 ///Monster
 ///////////
 
-Monster::Monster(int health, int a, string n, Room* l, Weapon* c) : Player(int health, int a, Room* l, Weapon* c)
+/*Monster::Monster(int health, int a, string n, Room* l, Weapon* c) : Player(int health, int a, Room* l, Weapon* c)
 {
+	name = n;
+}*/
+
+Monster::Monster(int health, int a, string n) {
+	hp = health;
+	atk = a;
 	name = n;
 }
 
 string Monster::getName() const {
 	return name;
+}
+
+void Monster::modifyHealth(int x) {
+	hp += x;
 }
 
 ///////////

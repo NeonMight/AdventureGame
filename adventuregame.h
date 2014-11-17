@@ -1,4 +1,4 @@
-// Version 1.0
+/*// Version 1.0
 //Created by Stephen Hoffman, Ethan Waddle, & Justin McAlister
 #include <iostream>
 //Flow: Ask for user input, player does action, if monsters are present, they attack, repeat.
@@ -92,3 +92,4 @@ class Weapon : public Item //temporarily boosts player attack. player cannot hav
 	private:
 		int val; //attack stat increase
 };
+*/

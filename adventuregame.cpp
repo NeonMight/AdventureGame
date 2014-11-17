@@ -43,14 +43,14 @@ void Player::get(int x) {
 	location->give(x); // Take from room's inventory
 }
 
-//In progress
-/* void Player::eat(int x) {
+
+void Player::eat(int x) {
 	//Code to determine if item is food will go here
-	int v = inventory[x]->getValue(); // Get healing value
-	modifyHealth(v); // Add to health
-	~*inventory[x];
+	//int v = inventory[x]->getValue(); // Get healing value
+	//modifyHealth(v); // Add to health
+	//~*inventory[x];
 	inventory[x] = NULL; // Open space in inventory
-}*/
+}
 
 void Player::drop(int x) {
 	if (inventory[x] == NULL) {std::cout << "No item in this space.\n"; return;}
@@ -289,7 +289,7 @@ Monster* Room::monsterIndex(int x) const {
 	return enemies[x];
 }
 
-string Room::getName() const {
+std::string Room::getName() const {
 	return name;
 }
 
@@ -300,7 +300,7 @@ Room* Room::getAdjacent(int x) const {
 ///////////
 ///Item
 ///////////
-Item::Item(string n, int iid)
+Item::Item(std::string n, int iid)
 {
 	name = n;
 	id = iid;
@@ -308,10 +308,10 @@ Item::Item(string n, int iid)
 
 Item::~Item()
 {
-	name = NULL;
+
 }
 
-string Item::getName() const {
+std::string Item::getName() const {
 	return name;
 }
 
@@ -324,13 +324,13 @@ string Item::getName() const {
 	name = n;
 }*/
 
-Monster::Monster(int health, int a, string n) {
+Monster::Monster(int health, int a, std::string n) {
 	hp = health;
 	atk = a;
 	name = n;
 }
 
-string Monster::getName() const {
+std::string Monster::getName() const {
 	return name;
 }
 
@@ -341,7 +341,7 @@ void Monster::modifyHealth(int x) {
 ///////////
 ///Food
 ///////////
-Food::Food(string n, int iid, int v) : Item(n, iid) //call item constructor
+Food::Food(std::string n, int iid, int v) : Item(n, iid) //call item constructor
 {
 	val = v;
 }
@@ -358,7 +358,7 @@ int Food::getValue() const {
 ///Weapon
 ///////////
 
-Weapon::Weapon(string n, int iid, int v) : Item(n, iid)
+Weapon::Weapon(std::string n, int iid, int v) : Item(n, iid)
 {
 	val = v;
 }

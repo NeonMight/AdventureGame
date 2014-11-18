@@ -4,6 +4,7 @@
 #include "monster.h"
 #include <iostream>
 #include <string> 
+#include <sstream>
 
 ///////////
 ///Player
@@ -105,31 +106,20 @@ void Player::doInput(std::string s) {
 	// Create 2 new arrays, each to hold a word.
 	std::string args[2];
 	
-	std::cout << "Milestone 1\n" << s[0] << std::endl;
-	// Put first word into first array
-	int i = 0;
-	while (s[i] != ' ' && s[i] != '\0') {
-		args[0][i] = s[i];
-		i++;
-	}
+	// Put words into arrays
+	std::istringstream is1(s);
+	is1 >> args[0];
+	std::istringstream is2(s);
+	is2 >> args[1];
 	
-	std::cout << "Milestone 2\n" << args[0] << std::endl;
-	// Put second word into second array
-	i++;
-	int j = 0;
-	while (s[i] != '\0') {
-		args[1][j] = s[i];
-		i++;
-		j++;
-	}
-	
-	std::cout << "Milestone 3\n";
+	std::cout << "Word 1:" << args[0] << std::endl;
+	std::cout << "Word 2:" << args[1] << std::endl;
 	// Make the strings lowercase so they can be checked without being case sensitive.
 	for (int k = 0; k < 2; k++)
-		for (int l = 0; l != '\0'; l++ )
+		for (int l = 0; args[k][l] != '\0'; l++ )
 			std::tolower(args[k][l]); // Should convert string to lowercase. Have not tested it yet.
 	
-	std::cout << "Milestone 4\n" << args[0] << std::endl;
+	std::cout << "Lowercase Word 1:" << args[0] << std::endl;
 	// Base input checker, takes the first word and uses the switch to call the needed function
 	if (args[0] == "eat") goto eat;
 	else if (args[0] == "get") goto get;

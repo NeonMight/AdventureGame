@@ -21,6 +21,7 @@ int main() {
 		cout << "Input Command:";
 		cin >> input;
 		p.doInput(input); // This function will convert user input into a function call. All game output will be from a function called from here.
+		cout << "\n";
 	}
 	cout << "You died!\n"; // Game over
 }

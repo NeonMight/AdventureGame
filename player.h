@@ -2,6 +2,7 @@
 #include <string>
 #include "item.h"
 #include "room.h"
+#pragma once
 
 //Player Class
 class Player //denotes the player character

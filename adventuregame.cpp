@@ -191,6 +191,11 @@ help:
 	return;
 }
 
+std::string Player::getCurrentLocation() const
+{
+	return location.getName();
+}
+
 ///////////
 ///Room
 ///////////

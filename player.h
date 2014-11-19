@@ -22,6 +22,7 @@ class Player //denotes the player character
 		void showHealth() const; // Prints out player's health
 		bool isAlive() const; // Returns status of the player, alive or dead
 		void doInput(std::string); // Function that takes user input
+		std::string getCurrentLocation() const; //uses get name on current room to describe current location
 	private:
 		int hp;		//hit points
 		int atk;	//attack value

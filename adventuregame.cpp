@@ -10,13 +10,15 @@
 ///Player
 ///////////
 
-Player::Player(int health, int a, Room* l, Weapon* c)
+Player::Player(int health, int a, Room* l)
 {
 	hp = health;
 	atk = a;
 	location = l;
 	inventory = new Item*[10];
-	currentwep = c;
+	for (int i = 0; i < 10; i++) {
+		inventory[i] = NULL;
+	}
 }
 
 Player::~Player()
@@ -39,6 +41,7 @@ void Player::go(int x) {
 void Player::get(int x) {
 	int i = nextOpen(); // Get next open spot
 	if ( i == -1 ) { std::cout << "There is no space in your inventory.\n"; return; } // If no spot available, return
+	if (location->atIndex(x) == NULL) {std::cout << "No item in this position\n";return;}
 	std::cout << "You picked up " << location->atIndex(x)->getName() << ".\n";
 	inventory[i] = location->atIndex(x); // Give the item to the inventory
 	location->give(x); // Take from room's inventory
@@ -201,11 +204,11 @@ Room::Room(std::string n, Room** a, Item** t, Monster** m) {
 	inventory = new Item*[10];	//no more than 10 items per room
 	enemies = new Monster*[5];	//no more than 5 enemies per room
 	//if there is an overflow, for loop will handle it
-	//construct adjacent rooms
+	/*//construct adjacent rooms
 	for( int i = 0; i < 4; i++)
 	{
 		adjacent[i] = a[i];
-	}
+	}*/
 	//construct inventory
 	for( int j = 0; j < 10; j++)
 	{
@@ -293,16 +296,20 @@ Room* Room::getAdjacent(int x) const {
 
 void Room::addAdjacent(Room** r)
 {
-	adjacent = r;
+	for( int i = 0; i < 4; i++)
+	{
+		adjacent[i] = r[i];
+	}
 }
 
 ///////////
 ///Item
 ///////////
-Item::Item(std::string n, int iid)
+Item::Item(std::string n, int iid, int v)
 {
 	name = n;
 	id = iid;
+	val = v;
 }
 
 Item::~Item()
@@ -312,6 +319,10 @@ Item::~Item()
 
 std::string Item::getName() const {
 	return name;
+}
+
+int Item::getValue() const {
+	return val;
 }
 
 ///////////
@@ -335,37 +346,4 @@ std::string Monster::getName() const {
 
 void Monster::modifyHealth(int x) {
 	hp += x;
-}
-
-///////////
-///Food
-///////////
-Food::Food(std::string n, int iid, int v) : Item(n, iid) //call item constructor
-{
-	val = v;
-}
-
-Food::~Food()
-{
-	
-}
-int Food::getValue() const {
-	return val;
-}
-
-///////////
-///Weapon
-///////////
-
-Weapon::Weapon(std::string n, int iid, int v) : Item(n, iid)
-{
-	val = v;
-}
-
-Weapon::~Weapon()
-{
-	
-}
-int Weapon::getValue() const {
-	return val;
 }

@@ -296,6 +296,11 @@ Room* Room::getAdjacent(int x) const {
 	return adjacent[x];
 }
 
+void Room::addAdjacent(Room** r)
+{
+	adjacent = r;
+}
+
 ///////////
 ///Item
 ///////////

@@ -107,19 +107,14 @@ void Player::doInput(std::string s) {
 	std::string args[2];
 	
 	// Put words into arrays
-	std::istringstream is1(s);
-	is1 >> args[0];
-	std::istringstream is2(s);
-	is2 >> args[1];
+	int divisionpoint = s.find(" ");
+	args[0] = s.substr(0,divisionpoint);
+	args[1] = s.substr(divisionpoint+1);
 	
-	std::cout << "Word 1:" << args[0] << std::endl;
-	std::cout << "Word 2:" << args[1] << std::endl;
 	// Make the strings lowercase so they can be checked without being case sensitive.
-	for (int k = 0; k < 2; k++)
-		for (int l = 0; args[k][l] != '\0'; l++ )
-			std::tolower(args[k][l]); // Should convert string to lowercase. Have not tested it yet.
+	for (int i = 0; i < 16; i++) {if (args[0][i] <='Z' && args[0][i]>='A') args[0][i] -= ('Z'-'z');} // Convert string to lowercase.
+	for (int i = 0; i < 16; i++) {if (args[1][i] <='Z' && args[1][i]>='A') args[1][i] -= ('Z'-'z');} // Convert string to lowercase.
 	
-	std::cout << "Lowercase Word 1:" << args[0] << std::endl;
 	// Base input checker, takes the first word and uses the switch to call the needed function
 	if (args[0] == "eat") goto eat;
 	else if (args[0] == "get") goto get;

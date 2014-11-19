@@ -70,6 +70,7 @@ void Player::attack(int x) {
 	if ( m == NULL ) { std::cout << "No enemy in this position.\n"; return; }
 	m->modifyHealth(-atk);
 	std::cout << "You attacked " << m->getName() << " for " << atk << " hit points.\n";
+	std::cout << m->getName() << " now has " << m->getHealth() << " HP.\n";
 }
 
 int Player::nextOpen() const {
@@ -239,7 +240,7 @@ void Room::searchRoom() const {
 	std::cout << "Monsters:\n";
 	for (int i = 0; i < 5; i++) {
 		std::cout << i << ": ";
-		if (enemies[i] != NULL) std::cout << enemies[i]->getName() << "\n";
+		if (enemies[i] != NULL) std::cout << enemies[i]->getName() << "(" << enemies[i]->getHealth() << " HP)\n";
 		else std::cout << "No Enemy\n";
 	}
 	
@@ -346,4 +347,8 @@ std::string Monster::getName() const {
 
 void Monster::modifyHealth(int x) {
 	hp += x;
+}
+
+int Monster::getHealth() const{
+	return hp;
 }

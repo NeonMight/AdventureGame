@@ -11,7 +11,7 @@ class Monster //monsters will attack player if player is in same room. Player ca
 		//~Monster();
 		std::string getName() const;
 		void modifyHealth(int);
-		void Attack(Player p); //monster will call modifyHealth on player and subtract attack value (This probably isn't necessary)
+		//void Attack(Player p); //monster will call modifyHealth on player and subtract attack value (This probably isn't necessary)
 	private:
 		int atk; // Attack damage
 		int hp; // Hit points

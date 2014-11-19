@@ -245,19 +245,19 @@ void Room::searchRoom() const {
 	
 	std::cout << "Connected Rooms:\n";
 	std::cout << "North: ";
-	if (adjacent[0] != NULL) std::cout << adjacent[0]->getName() << "\n";
+	if (adjacent[0] != NULL) {std::cout << adjacent[0]->getName() << "\n";}
 	else std::cout << "No Passage\n";
 	
 	std::cout << "South: ";
-	if (adjacent[1] != NULL) std::cout << adjacent[1]->getName() << "\n";
+	if (adjacent[1] != NULL) {std::cout << adjacent[1]->getName() << "\n";}
 	else std::cout << "No Passage\n";
 	
 	std::cout << "East: ";
-	if (adjacent[2] != NULL) std::cout << adjacent[2]->getName() << "\n";
+	if (adjacent[2] != NULL) {std::cout << adjacent[2]->getName() << "\n";}
 	else std::cout << "No Passage\n";
 	
 	std::cout << "West: ";
-	if (adjacent[3] != NULL) std::cout << adjacent[3]->getName() << "\n";
+	if (adjacent[3] != NULL) {std::cout << adjacent[3]->getName() << "\n";}
 	else std::cout << "No Passage\n";
 }
 

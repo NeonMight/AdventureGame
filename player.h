@@ -23,6 +23,7 @@ class Player //denotes the player character
 		bool isAlive() const; // Returns status of the player, alive or dead
 		void doInput(std::string); // Function that takes user input
 		std::string getCurrentLocation() const; //uses get name on current room to describe current location
+		void battle(); //accesses current location and calls monsterAttack
 	private:
 		int hp;		//hit points
 		int atk;	//attack value

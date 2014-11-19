@@ -18,6 +18,7 @@ class Room //each separate space. Player can travel between adjacent spaces with
 		Monster* monsterIndex(int) const; // Gives reference to the monster at an index
 		std::string getName() const; // Returns name of room
 		Room* getAdjacent(int) const; // Return pointer to adjacent room
+		void addAdjacent(Room** r);
 	private:
 		std::string name;	//basic name
 		Item** inventory; //items that room contains (Array)

@@ -8,7 +8,7 @@
 class Player //denotes the player character
 {
 	public:
-		Player(int health, int a, Room* l, Weapon* c); //no inventory because always starts as null
+		Player(int health, int a, Room* l); //no inventory because always starts as null
 		~Player();
 		void go(int); // Goes in a direction, 0-4, corresponding with n,s,e, and w
 		void get(int); //Takes int value to correspond with item index in room. When player gets a weapon, modify currentwep. Item is removed from room and added to inventory.
@@ -29,5 +29,5 @@ class Player //denotes the player character
 		int atk;	//attack value
 		Room* location;
 		Item** inventory;	//array of item pointers
-		Weapon* currentwep; //points to current weapon. If current points to null, player can pick up a weapon
+		Item* currentwep; //points to current weapon. If current points to null, player can pick up a weapon
 };

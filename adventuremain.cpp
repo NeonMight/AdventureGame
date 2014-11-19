@@ -11,23 +11,36 @@ int main() {
 	string input;
 	
 	//Initializations
-	Item t1("Test Item",0,0);
+	Item t1("Test Item 1",0,0);
+	Item t2("Test Item 2",0,0);
 	
 	Monster m1(20,3,"Test Monster");
 	
 	Item* r1i[] = {&t1,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL};
 	Monster* r1m[] = {NULL,&m1,NULL,NULL,NULL};
-	Item* r2i[] = {NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL};
-	Monster* r2m[] = {NULL,NULL,NULL,NULL,NULL};
-	
 	Room r1("Test 1",NULL,r1i,r1m);
+	
+	Item* r2i[] = {NULL,&t2,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL};
+	Monster* r2m[] = {NULL,NULL,NULL,NULL,NULL};
 	Room r2("Test 2",NULL,r2i,r2m);
 	
+	Item* r3i[] = {NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL};
+	Monster* r3m[] = {NULL,NULL,NULL,NULL,NULL};
+	Room r3("Test 3",NULL,r3i,r3m);
+	
+	Item* r4i[] = {NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL};
+	Monster* r4m[] = {NULL,NULL,NULL,NULL,NULL};
+	Room r4("Test 4",NULL,r4i,r4m);
+	
 	Room* r1a[] = {NULL,&r2,NULL,NULL};
-	Room* r2a[] = {&r1,NULL,NULL,NULL};
+	Room* r2a[] = {&r1,&r3,&r4,NULL};
+	Room* r3a[] = {&r2,NULL,NULL,NULL};
+	Room* r4a[] = {NULL,NULL,NULL,&r2};
 	
 	r1.addAdjacent(r1a);
 	r2.addAdjacent(r2a);
+	r3.addAdjacent(r3a);
+	r4.addAdjacent(r4a);
 	
 	Player p(100,10,&r1); // This is placeholder code.
 

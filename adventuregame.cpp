@@ -193,7 +193,7 @@ help:
 
 std::string Player::getCurrentLocation() const
 {
-	return location.getName();
+	return location->getName();
 }
 
 ///////////

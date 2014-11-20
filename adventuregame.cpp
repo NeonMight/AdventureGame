@@ -34,12 +34,31 @@ void Player::go(int x) {
 	if (location->getAdjacent(x) == NULL) { std::cout << "No passage in this direction.\n"; return; }
 	location = location->getAdjacent(x);
 	switch (x) {
-		case 0: std::cout << "You have moved north.\n"; return;
-		case 1: std::cout << "You have moved south.\n"; return;
-		case 2: std::cout << "You have moved east.\n"; return;
-		case 3: std::cout << "You have moved west.\n"; return;
+		case 0: std::cout << "You have moved north.\n"; break;
+		case 1: std::cout << "You have moved south.\n"; break;
+		case 2: std::cout << "You have moved east.\n"; break;
+		case 3: std::cout << "You have moved west.\n"; break;
 		default: return;
 	}
+	
+	std::cout << "You have entered " << location->getName() << ".\n";
+	
+	std::cout << "Connected Rooms:\n";
+	std::cout << "North: ";
+	if (location->getAdjacent(0) != NULL) {std::cout << location->getAdjacent(0)->getName() << "\n";}
+	else std::cout << "No Passage\n";
+	
+	std::cout << "South: ";
+	if (location->getAdjacent(1) != NULL) {std::cout << location->getAdjacent(1)->getName() << "\n";}
+	else std::cout << "No Passage\n";
+	
+	std::cout << "East: ";
+	if (location->getAdjacent(2) != NULL) {std::cout << location->getAdjacent(2)->getName() << "\n";}
+	else std::cout << "No Passage\n";
+	
+	std::cout << "West: ";
+	if (location->getAdjacent(3) != NULL) {std::cout << location->getAdjacent(3)->getName() << "\n";}
+	else std::cout << "No Passage\n";
 }
 
 void Player::get(int x) {

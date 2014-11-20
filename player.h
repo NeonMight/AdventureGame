@@ -15,21 +15,24 @@ class Player //denotes the player character
 		void drop(int); //Takes int value to correspond with item index in inventory to drop. Adds to room
 		void eat(int); //Adds food value, then consumes food
 		void attack(int); //does damage equal to player attack + currentwep. if null, + 0. Takes index of monster in room
-		void weapon(int); //sets current weapon and damage
+		void weapon(int); // Choose weapon
+		void armor(int); // Choose armor
 		int nextOpen() const; // Gives reference to next open space in inventory
 		Item* atIndex(int) const; // Gives reference to the item at an index in the inventory
 		void checkInventory() const; //outputs all things in player inventory
 		void modifyHealth(int); // Takes an int value and alters player's health by that value
 		void showHealth() const; // Prints out player's health
 		bool isAlive() const; // Returns status of the player, alive or dead
-		void doInput(std::string); // Function that takes user input
+		bool doInput(std::string); // Function that takes user input
 		std::string getCurrentLocation() const; //uses get name on current room to describe current location
 		void battle(); //accesses current location and calls monsterAttack
 	private:
 		int hp;		//hit points
 		int atk;	//attack value
 		int defaultatk; // Default attack value
+		float defense; // armor value, should be less than 1
 		Room* location;
 		Item** inventory;	//array of item pointers
-		Item* currentwep; //points to current weapon. If current points to null, player can pick up a weapon
+		int currentwep; // Index of weapon. If -1, no weapon
+		int gear; // Index of armor. If -1, no armor
 };

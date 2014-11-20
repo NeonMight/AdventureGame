@@ -85,7 +85,7 @@ int main() {
 	// Flow: Ask for user input, player does action, if monsters are present, they attack, repeat.
 	cout << "Welcome!\n";
 	while (p.isAlive()) { // Continue looping while the player is alive
-		cout << "You are currently in " << p.getCurrentLocation() << ".\nInput Command: ";
+		cout << "Input Command: ";
 		getline(cin,input);
 		attackturn = p.doInput(input); // This function will convert user input into a function call. All game output will be from a function called from here.
 		if (attackturn == true) {p.battle();}

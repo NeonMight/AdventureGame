@@ -7,8 +7,8 @@ class Item //items are things that the player can add to inventory. Some points 
 {
 	public:
 		Item(std::string,int,int);
-		~Item();
 		std::string getName() const;
+		int getID() const;
 		int getValue() const;
 	private:
 		std::string name;

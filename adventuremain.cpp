@@ -51,7 +51,7 @@ int main() {
 	Monster* r4m[] = {NULL,NULL,NULL,NULL,&m4};
 	Room r4("A Garden",r4i,r4m);
 	
-	Item* r5i[] = {NULL,NULL,NULL,&a3,NULL,NULL,NULL,NULL,w2,NULL};
+	Item* r5i[] = {NULL,NULL,NULL,&a3,NULL,NULL,NULL,NULL,&w2,NULL};
 	Monster* r5m[] = {NULL,NULL,&m3,NULL,NULL};
 	Room r5("A Hidden Tunnel",r5i,r5m);
 	

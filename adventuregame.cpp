@@ -15,11 +15,14 @@ Player::Player(int health, int a, Room* l)
 	hp = health;
 	defaultatk = a;
 	atk = defaultatk;
+	defense = 0;
 	location = l;
 	inventory = new Item*[10];
 	for (int i = 0; i < 10; i++) {
 		inventory[i] = NULL;
 	}
+	currentwep = -1;
+	gear = -1;
 }
 
 Player::~Player()
@@ -64,24 +67,35 @@ void Player::drop(int x) {
 	std::cout << "You dropped " << inventory[x]->getName() << ".\n";
 	location->take(i,inventory[x]);
 	inventory[x] = NULL;
+	if (inventory[currentwep] == NULL) {currentwep = -1; atk = defaultatk;}
+	if (inventory[gear] == NULL) {gear = -1; defense = 0;}
 }
 
 void Player::attack(int x) {
-	if (currentwep == NULL) {atk = defaultatk;}
 	Monster* m = location->monsterIndex(x);
 	if ( m == NULL ) { std::cout << "No enemy in this position.\n"; return; }
 	m->modifyHealth(-atk);
 	std::cout << "You attacked " << m->getName() << " for " << atk << " hit points.\n";
+	if (m->getHealth() <= 0) {std::cout << "You killed " << m->getName() << ".\n"; location->kill(x); return;}
 	std::cout << m->getName() << " now has " << m->getHealth() << " HP.\n";
 }
 
 void Player::weapon(int x) {
 	if (inventory[x] == NULL) {std::cout << "No item at this index.\n"; return;}
 	if (inventory[x]->getID() != 2) {std::cout << "This item is not a weapon.\n"; return;}
-	currentwep = inventory[x];
-	atk = defaultatk + currentwep->getValue();
-	std::cout << "You have equipped "<< currentwep->getName() << ".\n";
+	currentwep = x;
+	atk = defaultatk + inventory[currentwep]->getValue();
+	std::cout << "You have equipped "<< inventory[currentwep]->getName() << ".\n";
 	std::cout << "Your attack value is now " << atk << ".\n";
+}
+
+void Player::armor(int x) {
+	if (inventory[x] == NULL) {std::cout << "No item at this index.\n"; return;}
+	if (inventory[x]->getID() != 3) {std::cout << "This item is not armor.\n"; return;}
+	gear = x;
+	defense = inventory[gear]->getValue();
+	std::cout << "You have equipped "<< inventory[gear]->getName() << ".\n";
+	std::cout << "Your defense value is now " << defense << ".\n";
 }
 
 int Player::nextOpen() const {
@@ -98,14 +112,21 @@ void Player::checkInventory() const {
 		if (inventory[i] != NULL) {std::cout << inventory[i]->getName() << "\n";}
 		else {std::cout << "Empty\n";}
 	}
+	std::cout << "Weapon: ";
+	if (currentwep == -1) {std::cout << "None\n";}
+	else {std::cout << inventory[currentwep]->getName() << "\n";}
+	std::cout << "Armor: ";
+	if (gear == -1) {std::cout << "None\n";}
+	else {std::cout << inventory[gear]->getName() << "\n";}
 }
 
 void Player::modifyHealth(int x) {
 	hp += x;
 	std::cout << "You have ";
-	if (x > 0) {std::cout << "gained ";}
-	else {std::cout << "lost ";}
-	std::cout << x << " health.\n";
+	if (x > 0) {std::cout << "gained " << x;}
+	else {std::cout << "lost " << -x;}
+	std::cout << " health.\n";
+	showHealth();
 }
 
 void Player::showHealth() const {
@@ -117,7 +138,7 @@ bool Player::isAlive() const {
 	else {return false;}
 }
 
-void Player::doInput(std::string s) {
+bool Player::doInput(std::string s) {
 	// Create 2 new arrays, each to hold a word.
 	std::string args[2];
 	
@@ -136,88 +157,113 @@ void Player::doInput(std::string s) {
 	else if (args[0] == "drop") goto drop;
 	else if (args[0] == "go") goto go;
 	else if (args[0] == "attack") goto attack;
-	else if (args[0] == "search") {location->searchRoom(); return;}
-	else if (args[0] == "inventory") {checkInventory(); return;}
-	else if (args[0] == "health") {showHealth(); return;}
+	else if (args[0] == "search") {location->searchRoom(); return false;}
+	else if (args[0] == "inventory") {checkInventory(); return false;}
+	else if (args[0] == "health") {showHealth(); return false;}
 	else if (args[0] == "weapon") goto weapon;
+	else if (args[0] == "armor") goto armor;
 	else if (args[0] == "help") goto help;
-	else {std::cout << "Unknown command, use 'help' to view commands.\n"; return;}
+	else {std::cout << "Unknown command, use 'help' to view commands.\n"; return false;}
 	
 eat:
-	if (args[1] == "0") {eat(0); return;}
-	else if (args[1] == "1") {eat(1); return;}
-	else if (args[1] == "2") {eat(2); return;}
-	else if (args[1] == "3") {eat(3); return;}
-	else if (args[1] == "4") {eat(4); return;}
-	else if (args[1] == "5") {eat(5); return;}
-	else if (args[1] == "6") {eat(6); return;}
-	else if (args[1] == "7") {eat(7); return;}
-	else if (args[1] == "8") {eat(8); return;}
-	else if (args[1] == "9") {eat(9); return;}
-	else {std::cout << "Invalid argument for 'eat'.\nValid arguments for 'eat' are numbers 0-9.\n"; return;}
+	if (args[1] == "0") {eat(0); return true;}
+	else if (args[1] == "1") {eat(1); return true;}
+	else if (args[1] == "2") {eat(2); return true;}
+	else if (args[1] == "3") {eat(3); return true;}
+	else if (args[1] == "4") {eat(4); return true;}
+	else if (args[1] == "5") {eat(5); return true;}
+	else if (args[1] == "6") {eat(6); return true;}
+	else if (args[1] == "7") {eat(7); return true;}
+	else if (args[1] == "8") {eat(8); return true;}
+	else if (args[1] == "9") {eat(9); return true;}
+	else {std::cout << "Invalid argument for 'eat'.\nValid arguments for 'eat' are numbers 0-9.\n"; return false;}
 	
 get:
-	if (args[1] == "0") {get(0); return;}
-	else if (args[1] == "1") {get(1); return;}
-	else if (args[1] == "2") {get(2); return;}
-	else if (args[1] == "3") {get(3); return;}
-	else if (args[1] == "4") {get(4); return;}
-	else if (args[1] == "5") {get(5); return;}
-	else if (args[1] == "6") {get(6); return;}
-	else if (args[1] == "7") {get(7); return;}
-	else if (args[1] == "8") {get(8); return;}
-	else if (args[1] == "9") {get(9); return;}
-	else {std::cout << "Invalid argument for 'get'.\nValid arguments for 'get' are numbers 0-9.\n"; return;}
+	if (args[1] == "0") {get(0); return true;}
+	else if (args[1] == "1") {get(1); return true;}
+	else if (args[1] == "2") {get(2); return true;}
+	else if (args[1] == "3") {get(3); return true;}
+	else if (args[1] == "4") {get(4); return true;}
+	else if (args[1] == "5") {get(5); return true;}
+	else if (args[1] == "6") {get(6); return true;}
+	else if (args[1] == "7") {get(7); return true;}
+	else if (args[1] == "8") {get(8); return true;}
+	else if (args[1] == "9") {get(9); return true;}
+	else {std::cout << "Invalid argument for 'get'.\nValid arguments for 'get' are numbers 0-9.\n"; return false;}
 	
 drop:
-	if (args[1] == "0") {drop(0); return;}
-	else if (args[1] == "1") {drop(1); return;}
-	else if (args[1] == "2") {drop(2); return;}
-	else if (args[1] == "3") {drop(3); return;}
-	else if (args[1] == "4") {drop(4); return;}
-	else if (args[1] == "5") {drop(5); return;}
-	else if (args[1] == "6") {drop(6); return;}
-	else if (args[1] == "7") {drop(7); return;}
-	else if (args[1] == "8") {drop(8); return;}
-	else if (args[1] == "9") {drop(9); return;}
-	else {std::cout << "Invalid argument for 'drop'.\nValid arguments for 'drop' are numbers 0-9.\n"; return;}
+	if (args[1] == "0") {drop(0); return true;}
+	else if (args[1] == "1") {drop(1); return true;}
+	else if (args[1] == "2") {drop(2); return true;}
+	else if (args[1] == "3") {drop(3); return true;}
+	else if (args[1] == "4") {drop(4); return true;}
+	else if (args[1] == "5") {drop(5); return true;}
+	else if (args[1] == "6") {drop(6); return true;}
+	else if (args[1] == "7") {drop(7); return true;}
+	else if (args[1] == "8") {drop(8); return true;}
+	else if (args[1] == "9") {drop(9); return true;}
+	else {std::cout << "Invalid argument for 'drop'.\nValid arguments for 'drop' are numbers 0-9.\n"; return false;}
 	
 go:
-	if (args[1] == "n") {go(0); return;}
-	else if (args[1] == "s") {go(1); return;}
-	else if (args[1] == "e") {go(2); return;}
-	else if (args[1] == "w") {go(3); return;}
-	else {std::cout << "Invalid argument for 'go'.\nValid arguments for 'go' are 'n', 's', 'e', and 'w'.\n"; return;}
+	if (args[1] == "n") {go(0); return true;}
+	else if (args[1] == "s") {go(1); return true;}
+	else if (args[1] == "e") {go(2); return true;}
+	else if (args[1] == "w") {go(3); return true;}
+	else {std::cout << "Invalid argument for 'go'.\nValid arguments for 'go' are 'n', 's', 'e', and 'w'.\n"; return false;}
 	
 attack:
-	if (args[1] == "0") {attack(0); return;}
-	else if (args[1] == "1") {attack(1); return;}
-	else if (args[1] == "2") {attack(2); return;}
-	else if (args[1] == "3") {attack(3); return;}
-	else if (args[1] == "4") {attack(4); return;}
-	else {std::cout << "Invalid argument for 'attack'.\nValid arguments for 'attack' are numbers 0-4.\n"; return;}
+	if (args[1] == "0") {attack(0); return true;}
+	else if (args[1] == "1") {attack(1); return true;}
+	else if (args[1] == "2") {attack(2); return true;}
+	else if (args[1] == "3") {attack(3); return true;}
+	else if (args[1] == "4") {attack(4); return true;}
+	else {std::cout << "Invalid argument for 'attack'.\nValid arguments for 'attack' are numbers 0-4.\n"; return false;}
 
 weapon:
-	if (args[1] == "0") {weapon(0); return;}
-	else if (args[1] == "1") {weapon(1); return;}
-	else if (args[1] == "2") {weapon(2); return;}
-	else if (args[1] == "3") {weapon(3); return;}
-	else if (args[1] == "4") {weapon(4); return;}
-	else if (args[1] == "5") {weapon(5); return;}
-	else if (args[1] == "6") {weapon(6); return;}
-	else if (args[1] == "7") {weapon(7); return;}
-	else if (args[1] == "8") {weapon(8); return;}
-	else if (args[1] == "9") {weapon(9); return;}
-	else {std::cout << "Invalid argument for 'weapon'.\nValid arguments for 'weapon' are numbers 0-9.\n"; return;}
+	if (args[1] == "0") {weapon(0); return true;}
+	else if (args[1] == "1") {weapon(1); return true;}
+	else if (args[1] == "2") {weapon(2); return true;}
+	else if (args[1] == "3") {weapon(3); return true;}
+	else if (args[1] == "4") {weapon(4); return true;}
+	else if (args[1] == "5") {weapon(5); return true;}
+	else if (args[1] == "6") {weapon(6); return true;}
+	else if (args[1] == "7") {weapon(7); return true;}
+	else if (args[1] == "8") {weapon(8); return true;}
+	else if (args[1] == "9") {weapon(9); return true;}
+	else {std::cout << "Invalid argument for 'weapon'.\nValid arguments for 'weapon' are numbers 0-9.\n"; return false;}
+	
+armor:
+	if (args[1] == "0") {armor(0); return true;}
+	else if (args[1] == "1") {armor(1); return true;}
+	else if (args[1] == "2") {armor(2); return true;}
+	else if (args[1] == "3") {armor(3); return true;}
+	else if (args[1] == "4") {armor(4); return true;}
+	else if (args[1] == "5") {armor(5); return true;}
+	else if (args[1] == "6") {armor(6); return true;}
+	else if (args[1] == "7") {armor(7); return true;}
+	else if (args[1] == "8") {armor(8); return true;}
+	else if (args[1] == "9") {armor(9); return true;}
+	else {std::cout << "Invalid argument for 'armor'.\nValid arguments for 'armor' are numbers 0-9.\n"; return false;}
 	
 help:
 	std::cout << "Valid commands are 'eat', 'get', 'drop', 'go', 'attack', 'search', 'inventory', 'health', 'weapon', and 'help'.\n";
-	return;
+	return false;
 }
 
 std::string Player::getCurrentLocation() const
 {
 	return location->getName();
+}
+
+void Player::battle() {
+	int x = 0;
+	for (int i = 0; i < 5; i++) {
+		if (location->monsterIndex(i) != NULL) {x += location->monsterIndex(i)->getAttack();}
+	}
+	if (x == 0) {return;}
+	std::cout << "\nYou were attacked by enemies.\n";
+	x = (int)((1-defense)*x);
+	modifyHealth(-x);
 }
 
 ///////////
@@ -250,6 +296,7 @@ Room::~Room()
 }
 
 void Room::searchRoom() const {
+	std::cout << "Room: " << name << "\n";
 	std::cout << "Items:\n";
 	for (int i = 0; i < 10; i++) {
 		std::cout << i << ": ";
@@ -315,6 +362,11 @@ Room* Room::getAdjacent(int x) const {
 	return adjacent[x];
 }
 
+void Room::kill(int x) {
+	//This should only be called from attack()
+	enemies[x] = NULL;
+}
+
 void Room::addAdjacent(Room** r)
 {
 	for( int i = 0; i < 4; i++)
@@ -326,7 +378,7 @@ void Room::addAdjacent(Room** r)
 ///////////
 ///Item
 ///////////
-Item::Item(std::string n, int iid, int v)
+Item::Item(std::string n, int iid, float v)
 {
 	name = n;
 	id = iid;
@@ -337,7 +389,7 @@ std::string Item::getName() const {
 	return name;
 }
 
-int Item::getValue() const {
+float Item::getValue() const {
 	return val;
 }
 
@@ -370,4 +422,8 @@ void Monster::modifyHealth(int x) {
 
 int Monster::getHealth() const{
 	return hp;
+}
+
+int Monster::getAttack() const{
+	return atk;
 }

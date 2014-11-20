@@ -8,7 +8,7 @@
 class Room //each separate space. Player can travel between adjacent spaces with go command
 {
 	public:
-		Room(std::string n, Room** a, Item** t, Monster** m);
+		Room(std::string n, Item** t, Monster** m);
 		~Room();
 		void searchRoom() const; // prints out all the items, monsters, and adjacent rooms
 		void give(int); // Give an item to the player.

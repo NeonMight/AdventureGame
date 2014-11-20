@@ -13,7 +13,8 @@
 Player::Player(int health, int a, Room* l)
 {
 	hp = health;
-	atk = a;
+	defaultatk = a;
+	atk = defaultatk;
 	location = l;
 	inventory = new Item*[10];
 	for (int i = 0; i < 10; i++) {
@@ -49,10 +50,10 @@ void Player::get(int x) {
 
 
 void Player::eat(int x) {
-	//Code to determine if item is food will go here
-	//int v = inventory[x]->getValue(); // Get healing value
-	//modifyHealth(v); // Add to health
-	//~*inventory[x];
+	if (inventory[x] == NULL) {std::cout << "No item at this index.\n"; return;}
+	if (inventory[x]->getID() != 1) {std::cout << "This item is not food.\n"; return;}
+	int v = inventory[x]->getValue(); // Get healing value
+	modifyHealth(v); // Add to health
 	inventory[x] = NULL; // Open space in inventory
 }
 
@@ -66,11 +67,21 @@ void Player::drop(int x) {
 }
 
 void Player::attack(int x) {
+	if (currentwep == NULL) {atk = defaultatk;}
 	Monster* m = location->monsterIndex(x);
 	if ( m == NULL ) { std::cout << "No enemy in this position.\n"; return; }
 	m->modifyHealth(-atk);
 	std::cout << "You attacked " << m->getName() << " for " << atk << " hit points.\n";
 	std::cout << m->getName() << " now has " << m->getHealth() << " HP.\n";
+}
+
+void Player::weapon(int x) {
+	if (inventory[x] == NULL) {std::cout << "No item at this index.\n"; return;}
+	if (inventory[x]->getID() != 2) {std::cout << "This item is not a weapon.\n"; return;}
+	currentwep = inventory[x];
+	atk = defaultatk + currentwep->getValue();
+	std::cout << "You have equipped "<< currentwep->getName() << ".\n";
+	std::cout << "Your attack value is now " << atk << ".\n";
 }
 
 int Player::nextOpen() const {
@@ -128,6 +139,7 @@ void Player::doInput(std::string s) {
 	else if (args[0] == "search") {location->searchRoom(); return;}
 	else if (args[0] == "inventory") {checkInventory(); return;}
 	else if (args[0] == "health") {showHealth(); return;}
+	else if (args[0] == "weapon") goto weapon;
 	else if (args[0] == "help") goto help;
 	else {std::cout << "Unknown command, use 'help' to view commands.\n"; return;}
 	
@@ -184,9 +196,22 @@ attack:
 	else if (args[1] == "3") {attack(3); return;}
 	else if (args[1] == "4") {attack(4); return;}
 	else {std::cout << "Invalid argument for 'attack'.\nValid arguments for 'attack' are numbers 0-4.\n"; return;}
+
+weapon:
+	if (args[1] == "0") {weapon(0); return;}
+	else if (args[1] == "1") {weapon(1); return;}
+	else if (args[1] == "2") {weapon(2); return;}
+	else if (args[1] == "3") {weapon(3); return;}
+	else if (args[1] == "4") {weapon(4); return;}
+	else if (args[1] == "5") {weapon(5); return;}
+	else if (args[1] == "6") {weapon(6); return;}
+	else if (args[1] == "7") {weapon(7); return;}
+	else if (args[1] == "8") {weapon(8); return;}
+	else if (args[1] == "9") {weapon(9); return;}
+	else {std::cout << "Invalid argument for 'weapon'.\nValid arguments for 'weapon' are numbers 0-9.\n"; return;}
 	
 help:
-	std::cout << "Valid commands are 'eat', 'get', 'drop', 'go', 'attack', 'search', 'inventory', 'health', and 'help'.\n";
+	std::cout << "Valid commands are 'eat', 'get', 'drop', 'go', 'attack', 'search', 'inventory', 'health', 'weapon', and 'help'.\n";
 	return;
 }
 
@@ -199,17 +224,12 @@ std::string Player::getCurrentLocation() const
 ///Room
 ///////////
 
-Room::Room(std::string n, Room** a, Item** t, Monster** m) {
+Room::Room(std::string n, Item** t, Monster** m) {
 	name = n;
 	adjacent = new Room*[4]; //no more than 4 adjacent rooms
 	inventory = new Item*[10];	//no more than 10 items per room
 	enemies = new Monster*[5];	//no more than 5 enemies per room
 	//if there is an overflow, for loop will handle it
-	/*//construct adjacent rooms
-	for( int i = 0; i < 4; i++)
-	{
-		adjacent[i] = a[i];
-	}*/
 	//construct inventory
 	for( int j = 0; j < 10; j++)
 	{
@@ -313,17 +333,16 @@ Item::Item(std::string n, int iid, int v)
 	val = v;
 }
 
-Item::~Item()
-{
-
-}
-
 std::string Item::getName() const {
 	return name;
 }
 
 int Item::getValue() const {
 	return val;
+}
+
+int Item::getID() const {
+	return id;
 }
 
 ///////////

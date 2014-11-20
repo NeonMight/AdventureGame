@@ -19,6 +19,7 @@ class Room //each separate space. Player can travel between adjacent spaces with
 		std::string getName() const; // Returns name of room
 		Room* getAdjacent(int) const; // Return pointer to adjacent room
 		void addAdjacent(Room** r);
+		void kill(int); // Kill a monster
 		//void monsterAttack(Player p); //accesses enemies to all use Attack function
 	private:
 		std::string name;	//basic name

@@ -15,6 +15,7 @@ class Player //denotes the player character
 		void drop(int); //Takes int value to correspond with item index in inventory to drop. Adds to room
 		void eat(int); //Adds food value, then consumes food
 		void attack(int); //does damage equal to player attack + currentwep. if null, + 0. Takes index of monster in room
+		void weapon(int); //sets current weapon and damage
 		int nextOpen() const; // Gives reference to next open space in inventory
 		Item* atIndex(int) const; // Gives reference to the item at an index in the inventory
 		void checkInventory() const; //outputs all things in player inventory
@@ -27,6 +28,7 @@ class Player //denotes the player character
 	private:
 		int hp;		//hit points
 		int atk;	//attack value
+		int defaultatk; // Default attack value
 		Room* location;
 		Item** inventory;	//array of item pointers
 		Item* currentwep; //points to current weapon. If current points to null, player can pick up a weapon

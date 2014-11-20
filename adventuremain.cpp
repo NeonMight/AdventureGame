@@ -12,30 +12,30 @@ int main() {
 	bool attackturn = false;
 	
 	//Initializations
-	Item t1("Test Item 1",0,0);
-	Item t2("Test Food",1,10);
-	Item t3("Test Weapon",2,5);
+	Item t1("Iron sword",0,0);
+	Item t2("Apple",1,10);
+	Item t3("Wooden staff",2,5);
 	Item t4("The Holy Grail",1,10000); // When we start to make enemies fight back, we'll want this for testing
-	Item t5("Test Armor",3,0.5);
+	Item t5("Armor",3,0.5);
 	
-	Monster m1(50,3,"Test Monster 1");
+	Monster m1(50,3,"Territorial oak");
 	Monster m2(40,2,"Test Monster 2");
 	
 	Item* r1i[] = {&t1,NULL,NULL,NULL,NULL,NULL,NULL,NULL,&t5,NULL};
 	Monster* r1m[] = {NULL,NULL,NULL,NULL,NULL};
-	Room r1("Test 1",r1i,r1m);
+	Room r1("a drainage pipe",r1i,r1m);
 	
 	Item* r2i[] = {NULL,&t2,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL};
 	Monster* r2m[] = {NULL,&m2,NULL,&m1,NULL};
-	Room r2("Test 2",r2i,r2m);
+	Room r2("a hazy passageway",r2i,r2m);
 	
 	Item* r3i[] = {NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,&t4,NULL};
 	Monster* r3m[] = {NULL,NULL,NULL,NULL,NULL};
-	Room r3("Test 3",r3i,r3m);
+	Room r3("a bathroom",r3i,r3m);
 	
 	Item* r4i[] = {NULL,NULL,NULL,&t3,NULL,NULL,NULL,NULL,NULL,NULL};
 	Monster* r4m[] = {NULL,NULL,NULL,NULL,NULL};
-	Room r4("Test 4",r4i,r4m);
+	Room r4("a garden",r4i,r4m);
 	
 	Room* r1a[] = {NULL,&r2,NULL,NULL};
 	Room* r2a[] = {&r1,&r3,&r4,NULL};
@@ -52,7 +52,7 @@ int main() {
 	// Game loop
 	// Flow: Ask for user input, player does action, if monsters are present, they attack, repeat.
 	while (p.isAlive()) { // Continue looping while the player is alive
-		cout << "Input Command:";
+		cout << "Welcome!\nYou are now in " << p.getCurrentLocation() << ".\nInput Command: ";
 		getline(cin,input);
 		attackturn = p.doInput(input); // This function will convert user input into a function call. All game output will be from a function called from here.
 		if (attackturn == true) {p.battle();}

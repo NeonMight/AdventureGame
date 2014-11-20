@@ -246,7 +246,7 @@ armor:
 	else {std::cout << "Invalid argument for 'armor'.\nValid arguments for 'armor' are numbers 0-9.\n"; return false;}
 	
 help:
-	std::cout << "Valid commands are 'eat', 'get', 'drop', 'go', 'attack', 'search', 'inventory', 'health', 'weapon', and 'help'.\n";
+	std::cout << "Valid commands are 'eat', 'get', 'drop', 'go', 'attack', 'search', 'inventory', 'health', 'weapon', 'armor', and 'help'.\n";
 	return false;
 }
 

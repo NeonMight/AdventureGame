@@ -1,0 +1,12 @@
+User Commands:
+  eat x: Eat a food item to restore health, with x being a number 0 - 9 corresponding with your inventory.
+  get x: Get an item from the room, with x being a number 0 - 9 corresponding with an item in the room.
+  drop x: Drop an item from your inventory in the room, with x being a number 0 - 9 corresponding with your inventory.
+  go x: Move to another room, with x being a direction 'n', s', 'e', or 'w'.
+  attack x: Attack a monster, with x being a number 0 - 4 corresponding with a monster in the room.
+  search: See all the items, enemies, and passages in the room.
+  inventory: See your items, weapon, and armor.
+  health: See your current health.
+  weapon x: Choose a weapon from your inventory, with x being a number 0 - 9 corresponding with your inventory.
+  armor x: Choose armor from your inventory, with x being a number 0 - 9 corresponding with your inventory.
+  help: Will list all of the commands shown here.

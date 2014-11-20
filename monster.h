@@ -8,7 +8,6 @@ class Monster //monsters will attack player if player is in same room. Player ca
 	public:
 		//Monster(int health, int a, string n, Room* l, Weapon* c); //will call player constructor with same parameters
 		Monster(int health, int a, std::string n); // Monster constructor
-		//~Monster();
 		std::string getName() const;
 		void modifyHealth(int);
 		int getHealth() const;

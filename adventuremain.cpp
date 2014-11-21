@@ -50,27 +50,51 @@ int main() {
 	// Rooms
 	Item* r1i[] = {&a1,NULL,&f3,NULL,NULL,NULL,NULL,NULL,&t1,NULL};
 	Monster* r1m[] = {NULL,NULL,NULL,NULL,NULL};
-	Room r1("A Drainage Pipe",r1i,r1m);
+	Room r1("an alleyway",r1i,r1m);
 	
 	Item* r2i[] = {NULL,&w1,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL};
 	Monster* r2m[] = {NULL,&m2,NULL,&m1,NULL};
-	Room r2("A Hazy Passageway",r2i,r2m);
+	Room r2("a courtyard",r2i,r2m);
 	
 	Item* r3i[] = {NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,&f1,NULL};
 	Monster* r3m[] = {NULL,NULL,NULL,NULL,NULL};
-	Room r3("A Bathroom",r3i,r3m);
+	Room r3("a bathroom",r3i,r3m);
 	
 	Item* r4i[] = {NULL,NULL,NULL,&f4,NULL,NULL,&a2,NULL,NULL,NULL};
 	Monster* r4m[] = {NULL,NULL,NULL,NULL,&m4};
-	Room r4("A Garden",r4i,r4m);
+	Room r4("a garden",r4i,r4m);
 	
 	Item* r5i[] = {NULL,NULL,NULL,&a3,NULL,NULL,NULL,NULL,&w2,NULL};
 	Monster* r5m[] = {NULL,NULL,&m3,NULL,NULL};
-	Room r5("A Hidden Tunnel",r5i,r5m);
+	Room r5("a hidden tunnel",r5i,r5m);
 	
 	Item* r6i[] = {NULL,NULL,NULL,&f2,NULL,NULL,&w3,NULL,NULL,NULL};
 	Monster* r6m[] = {NULL,NULL,NULL,NULL,NULL};
-	Room r6("A Kitchen",r6i,r6m);
+	Room r6("a kitchen",r6i,r6m);
+	
+	Item* r7i[] = {NULL,NULL,&f3,NULL,NULL,NULL,&a4,NULL,NULL,NULL};
+	Monster* r7m[] = {NULL,NULL,NULL,NULL,&m5};
+	Room r7("a hazy passageway",r7i,r7m);
+	
+	Item* r8i[] = {NULL,&w4,NULL,NULL,NULL,&f6,NULL,NULL,NULL,NULL};
+	Monster* r8m[] = {NULL,&m6,NULL,NULL,NULL};
+	Room r8("a damp corridor",r8i,r8m);
+	
+	Item* r9i[] = {NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL};
+	Monster* r9m[] = {NULL,NULL,NULL,NULL,NULL};
+	Room r9("a dimly lit room",r9i,r9m);
+	
+	Item* r10i[] = {NULL,NULL,&w5,NULL,NULL,&a5,NULL,NULL,NULL,NULL};
+	Monster* r10m[] = {&m7,NULL,&m8,NULL,NULL};
+	Room r10("a dusty hallway",r10i,r10m);
+	
+	Item* r11i[] = {NULL,NULL,&f7,NULL,NULL,&a6,NULL,NULL,NULL,NULL};
+	Monster* r11m[] = {NULL,NULL,NULL,NULL,NULL};
+	Room r11("the rest room",r11i,r11m);
+	
+	Item* r12i[] = {NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL};
+	Monster* r12m[] = {NULL,NULL,NULL,NULL,NULL};
+	Room r12("the boss room",r12i,r12m);
 	
 	// Adjacent Rooms
 	Room* r1a[] = {NULL,&r2,NULL,NULL};
@@ -88,8 +112,26 @@ int main() {
 	Room* r5a[] = {&r6,NULL,NULL,&r4};
 	r5.addAdjacent(r5a);
 	
-	Room* r6a[] = {NULL,&r5,NULL,NULL};
+	Room* r6a[] = {NULL,&r5,NULL,&r7};
 	r6.addAdjacent(r6a);
+	
+	Room* r7a[] = {&r8,NULL,&r6,NULL};
+	r7.addAdjacent(r7a);
+	
+	Room* r8a[] = {NULL,&r7,NULL,&r9};
+	r8.addAdjacent(r8a);
+	
+	Room* r9a[] = {NULL,NULL,&r8,&r10};
+	r9.addAdjacent(r9a);
+	
+	Room* r10a[] = {&r11,NULL,&r9,NULL};
+	r10.addAdjacent(r10a);
+	
+	Room* r11a[] = {&r12,&r10,NULL,NULL};
+	r11.addAdjacent(r11a);
+	
+	Room* r12a[] = {NULL,NULL,NULL,NULL};
+	r12.addAdjacent(r12a);
 	
 	// Player
 	Player p(100,5,&r1);

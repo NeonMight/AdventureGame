@@ -18,21 +18,34 @@ int main() {
 	Item f1("Apple",1,5);
 	Item f2("Orange",1,5);
 	Item f3("Healing Potion",1,20);
-	Item f4("Poison Berries",1,-5);
+	Item f4("Strange Berries",1,-5);
+	Item f5("Strange Mushroom",1,-100);
+	Item f6("Loaf of bread",1,25);
+	Item f7("Magic Powder",1,100);
 	// Weapons
 	Item w1("Wooden Staff",2,5);
 	Item w2("Iron Sword",2,10);
-	Item w3("Raygun",2,20);
+	Item w3("Giant Hammer",2,20);
+	Item w4("Fire sword",2,30);
+	Item w5("Legendary Sword",2,50);
 	// Armor
-	Item a1("Paper Armor",3,0.25);
-	Item a2("Steel Armor",3,0.5);
-	Item a3("Diamond Armor",3,0.75);
+	Item a1("Paper Armor",3,0.05);
+	Item a2("Steel Armor",3,0.25);
+	Item a3("Bronze Armor",3,0.5);
+	Item a4("Silver Armor",3,0.6);
+	Item a5("Gold Armor",3,0.7);
+	Item a6("Diamond Armor",3,0.8);
 	
 	// Monsters
 	Monster m1(50,3,"Territorial Oak");
 	Monster m2(40,2,"Zombie");
 	Monster m3(20,5,"Goblin");
 	Monster m4(100,5,"Giant Snake");
+	Monster m5(80,4,"Smelly Ghost");
+	Monster m6(90,4,"Rowdy Mouse");
+	Monster m7(60,3,"Saibamen");
+	Monster m8(10,2,"No Emenies");
+	Monster m9(400,30,"Titanic Ant");
 	
 	// Rooms
 	Item* r1i[] = {&a1,NULL,&f3,NULL,NULL,NULL,NULL,NULL,&t1,NULL};

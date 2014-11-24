@@ -22,7 +22,7 @@ int main() {
 	Item f3("Healing Potion",1,20);
 	Item f4("Strange Berries",1,-5);
 	Item f5("Strange Mushroom",1,-100);
-	Item f6("Loaf of bread",1,25);
+	Item f6("Loaf of Bread",1,25);
 	Item f7("Magic Powder",1,100);
 	Item f8("Sandwich",1,15);
 	Item f9("Pear",1,10);
@@ -31,7 +31,7 @@ int main() {
 	Item w1("Wooden Staff",2,5);
 	Item w2("Iron Sword",2,20);
 	Item w3("Giant Hammer",2,30);
-	Item w4("Fire sword",2,40);
+	Item w4("Fire Sword",2,40);
 	Item w5("Legendary Sword",2,50);
 	Item w6("Holy Lance",2,200);
 	// Armor
@@ -44,14 +44,14 @@ int main() {
 	
 	// Monsters
 	Monster m1(50,3,"Territorial Oak");
-	Monster m2(40,2,"Attack slug");
-	Monster m3(20,5,"Putrid moldyman");
-	Monster m4(100,5,"Very large Snake");
+	Monster m2(40,2,"Attack Slug");
+	Monster m3(20,5,"Putrid Moldyman");
+	Monster m4(100,5,"Very Large Snake");
 	Monster m5(80,4,"Smelly Ghost");
 	Monster m6(90,4,"Rowdy Mouse");
-	Monster m7(60,3,"Mobile sprout");
-	Monster m8(10,2,"Spiteful crow");
-	Monster m9(400,30,"Dark wizard");
+	Monster m7(60,3,"Mobile Sprout");
+	Monster m8(10,2,"Spiteful Crow");
+	Monster m9(400,30,"Dark Wizard");
 
 	Monster* finalboss = &m9;
 	

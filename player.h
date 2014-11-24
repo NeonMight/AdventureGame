@@ -26,6 +26,7 @@ class Player //denotes the player character
 		bool doInput(std::string); // Function that takes user input
 		std::string getCurrentLocation() const; //uses get name on current room to describe current location
 		void battle(); //accesses current location and calls monsterAttack
+		void suicide(); // Allows player to kill themself, exiting the game.
 	private:
 		int hp;		//hit points
 		int atk;	//attack value

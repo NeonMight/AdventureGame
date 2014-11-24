@@ -61,7 +61,7 @@ void Player::go(int x) {
 	else std::cout << "No Passage\n";
 	std::cout << "Enemies here:\n";
 	for (int i = 0; i < 5; i++) {
-		if (enemies[i] != NULL) std::cout << i <<": " << enemies[i]->getName() "\n";
+		if (enemies[i] != NULL) std::cout << i <<": " << enemies[i]->getName() << "\n";
 	}
 }
 

@@ -12,6 +12,7 @@ class Monster //monsters will attack player if player is in same room. Player ca
 		void modifyHealth(int);
 		int getHealth() const;
 		int getAttack() const;
+		bool isAlive() const;
 	private:
 		int atk; // Attack damage
 		int hp; // Hit points

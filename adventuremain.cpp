@@ -12,8 +12,11 @@ int main() {
 	bool attackturn = false;
 	
 	//Initializations
+	
+	//Test Items
+	//Item t1("Healing herb",1,30); // When we start to make enemies fight back, we'll want this for testing
+	Item t1("H4X0R 4rm0r",3,2); // Heal damage taken instead...
 	//Food
-	Item t1("Healing herb",1,30); // When we start to make enemies fight back, we'll want this for testing
 	Item f1("Apple",1,5);
 	Item f2("Orange",1,5);
 	Item f3("Healing Potion",1,20);
@@ -49,6 +52,8 @@ int main() {
 	Monster m7(60,3,"Mobile sprout");
 	Monster m8(10,2,"Spiteful crow");
 	Monster m9(400,30,"Dark wizard");
+
+	Monster* finalboss = &m9;
 	
 	// Rooms
 	Item* r1i[] = {&a1,NULL,&f3,NULL,NULL,NULL,NULL,NULL,&t1,NULL};
@@ -96,12 +101,12 @@ int main() {
 	Room r11("rest point",r11i,r11m);
 	
 	Item* r12i[] = {NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL};
-	Monster* r12m[] = {NULL,NULL,NULL,NULL,NULL};
+	Monster* r12m[] = {NULL,NULL,&m9,NULL,NULL};
 	Room r12("the dark chamber",r12i,r12m);
 	
 	Item* r13i[] = {NULL,&w6,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL};
 	Monster* r13m[] = {NULL,NULL,NULL,NULL,NULL};
-	Room r13("sacred place")
+	Room r13("sacred place",r13i,r13m);
 	
 	// Adjacent Rooms
 	Room* r1a[] = {NULL,&r2,NULL,NULL};
@@ -145,16 +150,16 @@ int main() {
 	
 	// Player
 	Player p(100,5,&r1);
-
+	
 	// Game loop
 	// Flow: Ask for user input, player does action, if monsters are present, they attack, repeat.
-	cout << "Welcome!\n";
-	while (p.isAlive()) { // Continue looping while the player is alive
-		cout << "Input Command: ";
+	cout << "Welcome!";
+	while (p.isAlive() && finalboss->isAlive()) { // Continue looping while the player is alive and the final boss is alive
+		cout << "\nInput Command: ";
 		getline(cin,input);
 		attackturn = p.doInput(input); // This function will convert user input into a function call. All game output will be from a function called from here.
 		if (attackturn == true) {p.battle();}
-		cout << "\n";
 	}
-	cout << "You died!\n"; // Game over
+	if (p.isAlive() == false) {cout << "You died!\n"; return 0;} // Game over
+	if (finalboss->isAlive() == false) {cout << "Congrats!\nYou defeated the final boss!\n"; return 0;}
 }

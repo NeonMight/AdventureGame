@@ -9,4 +9,5 @@ User Commands:
   health: See your current health.
   weapon x: Choose a weapon from your inventory, with x being a number 0 - 9 corresponding with your inventory.
   armor x: Choose armor from your inventory, with x being a number 0 - 9 corresponding with your inventory.
+  suicide: Kill yourself to exit the game.
   help: Will list all of the commands shown here.

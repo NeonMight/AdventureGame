@@ -59,6 +59,10 @@ void Player::go(int x) {
 	std::cout << "West: ";
 	if (location->getAdjacent(3) != NULL) {std::cout << location->getAdjacent(3)->getName() << "\n";}
 	else std::cout << "No Passage\n";
+	std::cout << "Enemies here:\n";
+	for (int i = 0; i < 5; i++) {
+		if (enemies[i] != NULL) std::cout << i <<": " << enemies[i]->getName() "\n";
+	}
 }
 
 void Player::get(int x) {

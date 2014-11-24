@@ -1,4 +1,4 @@
-// Version 1.0
+// Version 2.0
 // Created by Stephen Hoffman, Ethan Waddle, & Justin McAlister
 
 #include "player.h"
@@ -12,9 +12,8 @@ int main() {
 	bool attackturn = false;
 	
 	//Initializations
-	// Test items
-	Item t1("The Holy Grail",1,10000); // When we start to make enemies fight back, we'll want this for testing
-	// Food
+	//Food
+	Item t1("Healing herb",1,30); // When we start to make enemies fight back, we'll want this for testing
 	Item f1("Apple",1,5);
 	Item f2("Orange",1,5);
 	Item f3("Healing Potion",1,20);
@@ -22,14 +21,18 @@ int main() {
 	Item f5("Strange Mushroom",1,-100);
 	Item f6("Loaf of bread",1,25);
 	Item f7("Magic Powder",1,100);
+	Item f8("Sandwich",1,15);
+	Item f9("Pear",1,10);
+	Item f10("Banana",1,15);
 	// Weapons
 	Item w1("Wooden Staff",2,5);
-	Item w2("Iron Sword",2,10);
-	Item w3("Giant Hammer",2,20);
-	Item w4("Fire sword",2,30);
+	Item w2("Iron Sword",2,20);
+	Item w3("Giant Hammer",2,30);
+	Item w4("Fire sword",2,40);
 	Item w5("Legendary Sword",2,50);
+	Item w6("Holy Lance",2,200);
 	// Armor
-	Item a1("Paper Armor",3,0.05);
+	Item a1("Wooden Armor",3,0.05);
 	Item a2("Steel Armor",3,0.25);
 	Item a3("Bronze Armor",3,0.5);
 	Item a4("Silver Armor",3,0.6);
@@ -38,14 +41,14 @@ int main() {
 	
 	// Monsters
 	Monster m1(50,3,"Territorial Oak");
-	Monster m2(40,2,"Zombie");
-	Monster m3(20,5,"Goblin");
-	Monster m4(100,5,"Giant Snake");
+	Monster m2(40,2,"Attack slug");
+	Monster m3(20,5,"Putrid moldyman");
+	Monster m4(100,5,"Very large Snake");
 	Monster m5(80,4,"Smelly Ghost");
 	Monster m6(90,4,"Rowdy Mouse");
-	Monster m7(60,3,"Saibamen");
-	Monster m8(10,2,"No Emenies");
-	Monster m9(400,30,"Titanic Ant");
+	Monster m7(60,3,"Mobile sprout");
+	Monster m8(10,2,"Spiteful crow");
+	Monster m9(400,30,"Dark wizard");
 	
 	// Rooms
 	Item* r1i[] = {&a1,NULL,&f3,NULL,NULL,NULL,NULL,NULL,&t1,NULL};
@@ -56,7 +59,7 @@ int main() {
 	Monster* r2m[] = {NULL,&m2,NULL,&m1,NULL};
 	Room r2("a courtyard",r2i,r2m);
 	
-	Item* r3i[] = {NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,&f1,NULL};
+	Item* r3i[] = {&f8,&f9,&f10,NULL,NULL,NULL,NULL,NULL,&f1,NULL};
 	Monster* r3m[] = {NULL,NULL,NULL,NULL,NULL};
 	Room r3("a bathroom",r3i,r3m);
 	
@@ -90,11 +93,15 @@ int main() {
 	
 	Item* r11i[] = {NULL,NULL,&f7,NULL,NULL,&a6,NULL,NULL,NULL,NULL};
 	Monster* r11m[] = {NULL,NULL,NULL,NULL,NULL};
-	Room r11("the rest room",r11i,r11m);
+	Room r11("rest point",r11i,r11m);
 	
 	Item* r12i[] = {NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL};
 	Monster* r12m[] = {NULL,NULL,NULL,NULL,NULL};
-	Room r12("the boss room",r12i,r12m);
+	Room r12("the dark chamber",r12i,r12m);
+	
+	Item* r13i[] = {NULL,&w6,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL};
+	Monster* r13m[] = {NULL,NULL,NULL,NULL,NULL};
+	Room r13("sacred place")
 	
 	// Adjacent Rooms
 	Room* r1a[] = {NULL,&r2,NULL,NULL};
@@ -109,7 +116,7 @@ int main() {
 	Room* r4a[] = {NULL,NULL,&r5,&r2};
 	r4.addAdjacent(r4a);
 	
-	Room* r5a[] = {&r6,NULL,NULL,&r4};
+	Room* r5a[] = {&r6,NULL,&r13,&r4};
 	r5.addAdjacent(r5a);
 	
 	Room* r6a[] = {NULL,&r5,NULL,&r7};
@@ -132,6 +139,9 @@ int main() {
 	
 	Room* r12a[] = {NULL,NULL,NULL,NULL};
 	r12.addAdjacent(r12a);
+	
+	Room* r13a[] = {NULL,NULL,NULL,&r5};
+	r13.addAdjacent(r13a);
 	
 	// Player
 	Player p(100,5,&r1);

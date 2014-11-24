@@ -4,7 +4,8 @@
 #include "monster.h"
 #include <iostream>
 #include <string> 
-#include <sstream>
+#include <cstdlib>
+#include <ctime>
 
 ///////////
 ///Player
@@ -59,9 +60,10 @@ void Player::go(int x) {
 	std::cout << "West: ";
 	if (location->getAdjacent(3) != NULL) {std::cout << location->getAdjacent(3)->getName() << "\n";}
 	else std::cout << "No Passage\n";
+	
 	std::cout << "Enemies here:\n";
 	for (int i = 0; i < 5; i++) {
-		if (enemies[i] != NULL) std::cout << i <<": " << enemies[i]->getName() << "\n";
+		if (location->monsterIndex(i) != NULL) std::cout << i <<": " << location->monsterIndex(i)->getName() << "\n";
 	}
 }
 
@@ -97,8 +99,12 @@ void Player::drop(int x) {
 void Player::attack(int x) {
 	Monster* m = location->monsterIndex(x);
 	if ( m == NULL ) { std::cout << "No enemy in this position.\n"; return; }
-	m->modifyHealth(-atk);
-	std::cout << "You attacked " << m->getName() << " for " << atk << " hit points.\n";
+	// Generate random number for damage
+	srand( time(NULL) );
+	int r = (rand() % 5) - 2;
+	// Modify enemy health, determine if attack kills
+	m->modifyHealth(r-atk);
+	std::cout << "You attacked " << m->getName() << " for " << -1 * (r - atk) << " hit points.\n";
 	if (m->getHealth() <= 0) {std::cout << "You killed " << m->getName() << ".\n"; location->kill(x); return;}
 	std::cout << m->getName() << " now has " << m->getHealth() << " HP.\n";
 }
@@ -185,6 +191,7 @@ bool Player::doInput(std::string s) {
 	else if (args[0] == "health") {showHealth(); return false;}
 	else if (args[0] == "weapon") goto weapon;
 	else if (args[0] == "armor") goto armor;
+	else if (args[0] == "suicide") {suicide(); return false;}
 	else if (args[0] == "help") goto help;
 	else {std::cout << "Unknown command, use 'help' to view commands.\n"; return false;}
 	
@@ -269,7 +276,7 @@ armor:
 	else {std::cout << "Invalid argument for 'armor'.\nValid arguments for 'armor' are numbers 0-9.\n"; return false;}
 	
 help:
-	std::cout << "Valid commands are 'eat', 'get', 'drop', 'go', 'attack', 'search', 'inventory', 'health', 'weapon', 'armor', and 'help'.\n";
+	std::cout << "Valid commands are 'eat', 'get', 'drop', 'go', 'attack', 'search', 'inventory', 'health', 'weapon', 'armor', 'suicide', and 'help'.\n";
 	return false;
 }
 
@@ -280,13 +287,23 @@ std::string Player::getCurrentLocation() const
 
 void Player::battle() {
 	int x = 0;
+	int r;
+	srand( time(NULL) );
 	for (int i = 0; i < 5; i++) {
-		if (location->monsterIndex(i) != NULL) {x += location->monsterIndex(i)->getAttack();}
+		if (location->monsterIndex(i) != NULL) {
+			r = (rand() % 3) - 1;
+			x += (location->monsterIndex(i)->getAttack() + r) ;
+		}
 	}
 	if (x == 0) {return;}
 	std::cout << "\nYou were attacked by enemies.\n";
 	x = (int)((1-defense)*x);
 	modifyHealth(-x);
+}
+
+void Player::suicide() {
+	std::cout << "You have banged your head against the ground until you died.\n";
+	hp = 0;
 }
 
 ///////////
@@ -449,4 +466,9 @@ int Monster::getHealth() const{
 
 int Monster::getAttack() const{
 	return atk;
+}
+
+bool Monster::isAlive() const {
+	if (hp > 0) {return true;}
+	else {return false;}
 }

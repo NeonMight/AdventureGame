@@ -101,7 +101,7 @@ void Player::attack(int x) {
 	if ( m == NULL ) { std::cout << "No enemy in this position.\n"; return; }
 	// Generate random number for damage
 	srand( time(NULL) );
-	int r = (rand() % 5) - 2;
+	int r = (rand() % atk) - (atk/2);
 	// Modify enemy health, determine if attack kills
 	m->modifyHealth(r-atk);
 	std::cout << "You attacked " << m->getName() << " for " << -1 * (r - atk) << " hit points.\n";
@@ -288,11 +288,13 @@ std::string Player::getCurrentLocation() const
 void Player::battle() {
 	int x = 0;
 	int r;
+	int a;
 	srand( time(NULL) );
 	for (int i = 0; i < 5; i++) {
 		if (location->monsterIndex(i) != NULL) {
-			r = (rand() % 3) - 1;
-			x += (location->monsterIndex(i)->getAttack() + r) ;
+			a = location->monsterIndex(i)->getAttack();
+			r = ( (rand() % (a/2)) - (a/4) ) + 0.5;
+			x += a + r;
 		}
 	}
 	if (x == 0) {return;}

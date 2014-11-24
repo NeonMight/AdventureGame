@@ -61,7 +61,7 @@ void Player::go(int x) {
 	if (location->getAdjacent(3) != NULL) {std::cout << location->getAdjacent(3)->getName() << "\n";}
 	else std::cout << "No Passage\n";
 	
-	std::cout << "Enemies here:\n";
+	std::cout << "Enemies Here:\n";
 	for (int i = 0; i < 5; i++) {
 		if (location->monsterIndex(i) != NULL) std::cout << i <<": " << location->monsterIndex(i)->getName() << "\n";
 	}

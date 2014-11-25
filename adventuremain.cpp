@@ -106,7 +106,7 @@ int main() {
 	Monster* r10m[] = {&m7,NULL,&m8,&m11,NULL};
 	Room r10("a dusty hallway",r10i,r10m);
 	
-	Item* r11i[] = {NULL,NULL,&f7,NULL,NULL,&a6,NULL,NULL,NULL,NULL};
+	Item* r11i[] = {NULL,NULL,&f7,NULL,NULL,&a5,NULL,NULL,NULL,NULL};
 	Monster* r11m[] = {NULL,NULL,NULL,NULL,NULL};
 	Room r11("rest point",r11i,r11m);
 	
@@ -114,7 +114,7 @@ int main() {
 	Monster* r12m[] = {NULL,NULL,&m14,NULL,NULL};
 	Room r12("the dark chamber",r12i,r12m);
 	
-	Item* r13i[] = {NULL,&w6,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL};
+	Item* r13i[] = {NULL,&w6,NULL,NULL,NULL,NULL,NULL,NULL,NULL,&a6};
 	Monster* r13m[] = {&m13,NULL,NULL,NULL,NULL};
 	Room r13("sacred place",r13i,r13m);
 	

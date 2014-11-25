@@ -27,13 +27,17 @@ int main() {
 	Item f8("Sandwich",1,15);
 	Item f9("Pear",1,10);
 	Item f10("Banana",1,15);
+	Item f11("Pork n Beans",1,40);
+	Item f12("Can o Spam",1,50);
+	Item f13("Hotdog Buns",1,25);
+	Item f14("Ice Cream",1,50);
 	// Weapons
 	Item w1("Wooden Staff",2,5);
 	Item w2("Iron Sword",2,20);
 	Item w3("Giant Hammer",2,30);
 	Item w4("Fire Sword",2,40);
 	Item w5("Legendary Sword",2,50);
-	Item w6("Holy Lance",2,70);
+	Item w6("Holy Lance",2,100);
 	// Armor
 	Item a1("Wooden Armor",3,0.07);
 	Item a2("Steel Armor",3,0.1);
@@ -49,11 +53,16 @@ int main() {
 	Monster m4(100,5,"Very Large Snake");
 	Monster m5(80,4,"Smelly Ghost");
 	Monster m6(90,4,"Rowdy Mouse");
-	Monster m7(60,3,"Mobile Sprout");
-	Monster m8(10,2,"Spiteful Crow");
-	Monster m9(500,50,"Dark Wizard");
+	Monster m7(60,8,"Mobile Sprout");
+	Monster m8(100,7,"Spiteful Crow");
+	Monster m9(110,10,"Great Grey Wolf");
+	Monster m10(120,12,"Bear on Fire");
+	Monster m11(100,20,"Horned Beast");
+	Monster m12(140,15,"Blue Phantom");
+	Monster m13(200,60,"Shattered Man");
+	Monster m14(500,60,"Dark Spirit");
 	
-	Monster* finalboss = &m9;
+	Monster* finalboss = &m14;
 	
 	// Rooms
 	Item* r1i[] = {&a1,NULL,&f3,NULL,NULL,NULL,NULL,NULL,&t1,NULL};
@@ -76,12 +85,12 @@ int main() {
 	Monster* r5m[] = {NULL,NULL,&m3,NULL,NULL};
 	Room r5("a hidden tunnel",r5i,r5m);
 	
-	Item* r6i[] = {NULL,NULL,NULL,&f2,NULL,NULL,&w3,NULL,NULL,NULL};
-	Monster* r6m[] = {NULL,NULL,NULL,NULL,NULL};
+	Item* r6i[] = {&f11,NULL,&f14,&f2,&f13,NULL,&w3,&f12,NULL,NULL};
+	Monster* r6m[] = {NULL,NULL,&m9,NULL,NULL};
 	Room r6("a kitchen",r6i,r6m);
 	
 	Item* r7i[] = {NULL,NULL,&f3,NULL,NULL,NULL,&a4,NULL,NULL,NULL};
-	Monster* r7m[] = {NULL,NULL,NULL,NULL,&m5};
+	Monster* r7m[] = {NULL,&m10,NULL,NULL,&m5};
 	Room r7("a hazy passageway",r7i,r7m);
 	
 	Item* r8i[] = {NULL,&w4,NULL,NULL,NULL,&f6,NULL,NULL,NULL,NULL};
@@ -89,11 +98,11 @@ int main() {
 	Room r8("a damp corridor",r8i,r8m);
 	
 	Item* r9i[] = {NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL};
-	Monster* r9m[] = {NULL,NULL,NULL,NULL,NULL};
+	Monster* r9m[] = {&m12,NULL,NULL,NULL,NULL};
 	Room r9("a dimly lit room",r9i,r9m);
 	
 	Item* r10i[] = {NULL,NULL,&w5,NULL,NULL,&a5,NULL,NULL,NULL,NULL};
-	Monster* r10m[] = {&m7,NULL,&m8,NULL,NULL};
+	Monster* r10m[] = {&m7,NULL,&m8,&m11,NULL};
 	Room r10("a dusty hallway",r10i,r10m);
 	
 	Item* r11i[] = {NULL,NULL,&f7,NULL,NULL,&a6,NULL,NULL,NULL,NULL};
@@ -101,11 +110,11 @@ int main() {
 	Room r11("rest point",r11i,r11m);
 	
 	Item* r12i[] = {NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL};
-	Monster* r12m[] = {NULL,NULL,&m9,NULL,NULL};
+	Monster* r12m[] = {NULL,NULL,&m14,NULL,NULL};
 	Room r12("the dark chamber",r12i,r12m);
 	
 	Item* r13i[] = {NULL,&w6,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL};
-	Monster* r13m[] = {NULL,NULL,NULL,NULL,NULL};
+	Monster* r13m[] = {&m13,NULL,NULL,NULL,NULL};
 	Room r13("sacred place",r13i,r13m);
 	
 	// Adjacent Rooms
@@ -153,7 +162,7 @@ int main() {
 	
 	// Game loop
 	// Flow: Ask for user input, player does action, if monsters are present, they attack, repeat.
-	cout << "Welcome!";
+	cout << "Welcome, Hero! To display a list of available commands, type the word help and press enter";
 	while (p.isAlive() && finalboss->isAlive()) { // Continue looping while the player is alive and the final boss is alive
 		cout << "\nInput Command: ";
 		getline(cin,input);
@@ -161,5 +170,5 @@ int main() {
 		if (attackturn == true) {p.battle();}
 	}
 	if (p.isAlive() == false) {cout << "You died!\n"; return 0;} // Game over
-	if (finalboss->isAlive() == false) {cout << "Congrats!\nYou defeated the final boss!\n"; return 0;}
+	if (finalboss->isAlive() == false) {cout << "Congratulations!\nYou defeated the final boss!\n"; return 0;}
 }

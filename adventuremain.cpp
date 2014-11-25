@@ -14,8 +14,8 @@ int main() {
 	//Initializations
 	
 	//Test Items
-	//Item t1("Healing herb",1,30); // When we start to make enemies fight back, we'll want this for testing
-	Item t1("H4X0R 4rm0r",3,2); // Heal damage taken instead...
+	Item t1("Healing herb",1,30); // When we start to make enemies fight back, we'll want this for testing
+	//Item t1("H4X0R 4rm0r",3,2); // Heal damage taken instead...
 	//Food
 	Item f1("Apple",1,5);
 	Item f2("Orange",1,5);
@@ -33,14 +33,14 @@ int main() {
 	Item w3("Giant Hammer",2,30);
 	Item w4("Fire Sword",2,40);
 	Item w5("Legendary Sword",2,50);
-	Item w6("Holy Lance",2,200);
+	Item w6("Holy Lance",2,70);
 	// Armor
-	Item a1("Wooden Armor",3,0.05);
-	Item a2("Steel Armor",3,0.25);
-	Item a3("Bronze Armor",3,0.5);
-	Item a4("Silver Armor",3,0.6);
-	Item a5("Gold Armor",3,0.7);
-	Item a6("Diamond Armor",3,0.8);
+	Item a1("Wooden Armor",3,0.07);
+	Item a2("Steel Armor",3,0.1);
+	Item a3("Bronze Armor",3,0.3);
+	Item a4("Silver Armor",3,0.4);
+	Item a5("Gold Armor",3,0.5);
+	Item a6("Diamond Armor",3,0.7);
 	
 	// Monsters
 	Monster m1(50,3,"Territorial Oak");
@@ -51,8 +51,8 @@ int main() {
 	Monster m6(90,4,"Rowdy Mouse");
 	Monster m7(60,3,"Mobile Sprout");
 	Monster m8(10,2,"Spiteful Crow");
-	Monster m9(400,30,"Dark Wizard");
-
+	Monster m9(500,50,"Dark Wizard");
+	
 	Monster* finalboss = &m9;
 	
 	// Rooms

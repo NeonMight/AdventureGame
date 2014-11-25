@@ -1,12 +1,17 @@
-User Commands:
-  eat x: Eat a food item to restore health, with x being a number 0 - 9 corresponding with your inventory.
-  get x: Get an item from the room, with x being a number 0 - 9 corresponding with an item in the room.
-  drop x: Drop an item from your inventory in the room, with x being a number 0 - 9 corresponding with your inventory.
-  go x: Move to another room, with x being a direction 'n', s', 'e', or 'w'.
-  attack x: Attack a monster, with x being a number 0 - 4 corresponding with a monster in the room.
+User Commands & Explanation of game mechanics:
+  eat x: Eat a food item to restore health, with x being a number 0 - 9 corresponding with your inventory. The player starts out
+    with 100 hp and can overheal to a maximum of 250.
+  get x: Get an item from the room, with x being a number 0 - 9 corresponding with an item in the room. Items will be in random
+    locations, so use search to find items.
+  drop x: Drop an item from your inventory in the room, with x being a number 0 - 9 corresponding with your inventory. Dropped
+    items will fall into the current room.
+  go x: Move to another room, with x being a direction 'n', s', 'e', or 'w'. Beware: You will not be able to escape the room of
+    the final boss!
+  attack x: Attack a monster, with x being a number 0 - 4 corresponding with a monster in the room. Damage done to enemies will
+    be calculated randomly within a range according to your attack value.
   search: See all the items, enemies, and passages in the room.
   inventory: See your items, weapon, and armor.
-  health: See your current health.
+  health: See your current health. Once your health reaches 0, you die and it's game over!
   weapon x: Choose a weapon from your inventory, with x being a number 0 - 9 corresponding with your inventory.
   armor x: Choose armor from your inventory, with x being a number 0 - 9 corresponding with your inventory.
   suicide: Kill yourself to exit the game.

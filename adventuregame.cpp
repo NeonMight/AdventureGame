@@ -304,7 +304,7 @@ void Player::battle() {
 }
 
 void Player::suicide() {
-	std::cout << "You have banged your head against the ground until you died.\n";
+	std::cout << "You have banged your head against the ground until...\n";
 	hp = 0;
 }
 

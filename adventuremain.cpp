@@ -31,13 +31,14 @@ int main() {
 	Item f12("Can o Spam",1,50);
 	Item f13("Hotdog Buns",1,25);
 	Item f14("Ice Cream",1,50);
+	Item f15("Pizza",1,40);
 	// Weapons
 	Item w1("Wooden Staff",2,5);
 	Item w2("Iron Sword",2,20);
 	Item w3("Giant Hammer",2,30);
 	Item w4("Fire Sword",2,40);
 	Item w5("Legendary Sword",2,50);
-	Item w6("Holy Lance",2,100);
+	Item w6("Holy Lance",2,120);
 	// Armor
 	Item a1("Wooden Armor",3,0.07);
 	Item a2("Steel Armor",3,0.1);
@@ -57,10 +58,10 @@ int main() {
 	Monster m8(100,7,"Spiteful Crow");
 	Monster m9(110,10,"Great Grey Wolf");
 	Monster m10(120,12,"Bear on Fire");
-	Monster m11(100,20,"Horned Beast");
+	Monster m11(100,10,"Horned Beast");
 	Monster m12(140,15,"Blue Phantom");
 	Monster m13(200,60,"Shattered Man");
-	Monster m14(500,60,"Dark Spirit");
+	Monster m14(500,50,"Dark Spirit");
 	
 	Monster* finalboss = &m14;
 	
@@ -85,7 +86,7 @@ int main() {
 	Monster* r5m[] = {NULL,NULL,&m3,NULL,NULL};
 	Room r5("a hidden tunnel",r5i,r5m);
 	
-	Item* r6i[] = {&f11,NULL,&f14,&f2,&f13,NULL,&w3,&f12,NULL,NULL};
+	Item* r6i[] = {&f11,NULL,&f14,&f2,&f13,NULL,&w3,&f12,&f14,NULL};
 	Monster* r6m[] = {NULL,NULL,&m9,NULL,NULL};
 	Room r6("a kitchen",r6i,r6m);
 	

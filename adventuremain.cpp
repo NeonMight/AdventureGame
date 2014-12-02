@@ -163,7 +163,9 @@ int main() {
 	
 	// Game loop
 	// Flow: Ask for user input, player does action, if monsters are present, they attack, repeat.
-	cout << "Welcome, Hero! To display a list of available commands, type the word help and press enter";
+	
+
+	
 	while (p.isAlive() && finalboss->isAlive()) { // Continue looping while the player is alive and the final boss is alive
 		cout << "\nInput Command: ";
 		getline(cin,input);

@@ -164,7 +164,26 @@ int main() {
 	// Game loop
 	// Flow: Ask for user input, player does action, if monsters are present, they attack, repeat.
 	
+	cout<<"Welcome hero!\n";
+	cout<< "Choose your class:\n assassin   paladin   ulfheidinn berserker black_knight\n If you enter anything different, you will start off with base health, armor and damage.\n";
+	
+	cout << "As an assassin, you strike with deadly accuracy to the enemy's critical points, granting +20 damage.  You move swiftly and evasively, taking 1 percent less damage.\n";
+	cout << "As a paladin, your strong constitution grants +50 health; your advanced musculature allows you to shrug off minor wonds, taking 10 percent less of it.\n";	
+	cout << "A warrior who has slain a wolf with their bare hands, the ulfheidinn strikes with terrible fury, adding +10 damage to any attack.  The wolf pelt you wear into battle grants 5 percent damage protection.\n";
+	cout << "The elite frontline spearhead of any Viking invasion, the berserker slays bears with no weapons other than his own fearsome strength, with +15 damage; your highly durable bearhide shirt protects you from 6 percent of damage.\n";
+	cout << "With no great weapon prowess, but +150 health, the Black Knight fights on when all others would yield.  Blows that would maim a sane person, are to you mere flesh wounds.\n";
 
+	string classChoice;
+	cin>>classChoice;
+	
+	if(classChoice=="assassin")p.chooseClass(0,20,0.01);
+	else if(classChoice=="paladin")p.chooseClass(50,0,0.1);
+	else if(classChoice=="ulfheidinn")p.chooseClass(0,10,0.05);
+	else if(classChoice=="berserker")p.chooseClass(0,15,0.06);
+	else if(classChoice=="black_knight")p.chooseClass(150,0,0);
+	else p.chooseClass(0,0,0);
+
+	cout<<"\n";
 	
 	while (p.isAlive() && finalboss->isAlive()) { // Continue looping while the player is alive and the final boss is alive
 		cout << "\nInput Command: ";

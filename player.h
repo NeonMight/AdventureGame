@@ -27,6 +27,10 @@ class Player //denotes the player character
 		std::string getCurrentLocation() const; //uses get name on current room to describe current location
 		void battle(); //accesses current location and calls monsterAttack
 		void suicide(); // Allows player to kill themself, exiting the game.
+		
+		void chooseClass(int H, int A, float D){
+		hp+=H; defaultatk+=A; defense+=D;} //modifies base stats
+		
 	private:
 		int hp;		//hit points
 		int atk;	//attack value
